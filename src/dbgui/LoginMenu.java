@@ -88,7 +88,7 @@ public class LoginMenu extends javax.swing.JFrame {
 				usernameLab.setBounds(35, 14, 91, 28);
 			}
 			{
-				usernameField = new JTextField("clin3");
+				usernameField = new JTextField("id");
 				getContentPane().add(usernameField);
 				usernameField.setBounds(133, 14, 119, 28);
 			}
@@ -99,7 +99,7 @@ public class LoginMenu extends javax.swing.JFrame {
 				passwdLab.setBounds(35, 49, 105, 28);
 			}
 			{
-				passwdField = new JTextField("Prmg7Whb");
+				passwdField = new JTextField("pass");
 				getContentPane().add(passwdField);
 				passwdField.setBounds(133, 49, 119, 28);
 			}
