@@ -129,7 +129,7 @@ public class LoginMenu extends javax.swing.JFrame {
 			{
 				queryBut = new JButton();
 				getContentPane().add(queryBut);
-				queryBut.setText("Query the Database");
+				queryBut.setText("Scripts");
 				queryBut.setBounds(14, 196, 175, 28);
 				queryBut.setEnabled(false);
 				queryBut.addActionListener(new ActionListener() {

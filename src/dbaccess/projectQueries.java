@@ -45,6 +45,10 @@ public class ProjectQueries {
 		questions.add("24. In a local or national crisis, we need to find all the people who once held a job of the special job-profile identifier.");
 		questions.add("25. Find all the unemployed people who once held a job of the given job-profile identifier.");
 		questions.add("26. Find out the biggest employer in terms of number of employees or the total amount of salaries and wages paid to employees.");
+		questions.add("Create all tables");
+		questions.add("Drop all tables");
+		questions.add("Insert all tables");
+		
 	}
 	public void addQueries()
 	{
@@ -107,7 +111,7 @@ public class ProjectQueries {
 	}
 	public void createMap()
 	{
-		for(int i =0; i<questions.size();i++)
+		for(int i =0; i<queries.size();i++)
 		{
 			this.map.put(questions.get(i), queries.get(i));
 		}

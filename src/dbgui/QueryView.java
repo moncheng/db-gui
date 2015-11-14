@@ -17,6 +17,7 @@ import javax.swing.table.TableModel;
 import dbaccess.DBConnection;
 import dbaccess.ProjectQueries;
 import dbaccess.Queries;
+import dbaccess.ScriptLoader;
 
 import java.sql.Connection;
 import java.sql.ResultSet; 
@@ -72,8 +73,8 @@ public class QueryView extends javax.swing.JFrame {
 			{
 				tnLabel = new JLabel();
 				getContentPane().add(tnLabel);
-				tnLabel.setText("Chose a Query: ");
-				tnLabel.setBounds(7, 0, 91, 28);
+				tnLabel.setText("Chose a Query or Script: ");
+				tnLabel.setBounds(7, 0, 160, 28);
 			}
 			{
 				queryPane = new JScrollPane();
@@ -82,7 +83,7 @@ public class QueryView extends javax.swing.JFrame {
 				{
 					queryArea = new JTextArea();
 					queryPane.setViewportView(queryArea);
-					queryArea.setText("query");
+					queryArea.setText("SQL statement ");
 				}
 			}
 			{
@@ -139,9 +140,43 @@ public class QueryView extends javax.swing.JFrame {
 		String chosenQuery = (String) tnJCombo.getSelectedItem();
 		ProjectQueries queries =new ProjectQueries();
 		String query= queries.getQuery(chosenQuery);
+		ScriptLoader script=new ScriptLoader();
+		if(chosenQuery=="Create all tables")
+		{
+			runScript(script.CreateTables());
+		}
+		else if (chosenQuery=="Drop all tables")
+		{
+			runScript(script.DropAllTables(db));
+
+		}
+		else if (chosenQuery=="Insert all tables")
+		{
+			runScript(script.insertAllTables());
+		}
+		else
+		{
+			runQuery(query);
+		}
 		System.out.println(query);
-		queryArea.setText(query);
+		
+		
+		query=script.DropAllTables(db);
+		
+
+	}
+	public void runScript(String bigQuery)
+	{
+		String[] queries=bigQuery.split(";");
+		for(String query:queries)
+			runQuery(query);
+	}
+	
+	public void runQuery(String query)
+	{
+		
 		try {
+			queryArea.setText(query);
 			ResultSet rs = q.runSQLQuery(query);
 			Vector res = q.resultSet2Vector(rs);
 			TableModel tableModel = new DefaultTableModel(res, q.getTitlesAsVector(rs));
@@ -151,7 +186,6 @@ public class QueryView extends javax.swing.JFrame {
 			msgArea.append("\n" + sqle.toString());
 		}
 	}
-	
 	public ResultSet runSQLQuery(String str) throws SQLException {
 		Statement stmt = db.createStatement();
 		return stmt.executeQuery(str);
