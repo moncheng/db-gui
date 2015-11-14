@@ -14,8 +14,10 @@ import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import dbaccess.DBConnection;
 import dbaccess.Queries;
 
+import java.sql.Connection;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
 import java.util.Vector;
@@ -40,10 +42,18 @@ public class QueryView extends javax.swing.JFrame {
 	private JTextArea msgArea;
 	private JScrollPane msgPane;
 	private JScrollPane jScrollPane1;
+	private Connection db;
 
 	/**
 	* constructor takes a reference of a db accesser object 
 	*/
+	public QueryView(Queries q,Connection dbc) {
+		super();
+		this.q = q;
+		this.db=dbc;
+		initGUI();
+	}
+	
 	public QueryView(Queries q) {
 		super();
 		this.q = q;

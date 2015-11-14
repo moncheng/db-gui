@@ -294,7 +294,7 @@ public class LoginMenu extends javax.swing.JFrame {
 
 	private void queryButButActionPerformed(ActionEvent evt) {
 		//System.out.println("tabViewBut.actionPerformed, event=" + evt);
-		QueryView inst = new QueryView(q);
+		QueryView inst = new QueryView(q,conn);
 		inst.setVisible(true);
 	}
 
