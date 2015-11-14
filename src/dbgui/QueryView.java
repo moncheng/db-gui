@@ -111,6 +111,7 @@ public class QueryView extends javax.swing.JFrame {
 	private void tnJComboActionPerformed(ActionEvent evt) {
 		//System.out.println("tnJCombo.actionPerformed, event=" + evt);
 		String chosenQuery = (String) tnJCombo.getSelectedItem();
+		System.out.println(chosenQuery);
 //		try {
 //			ResultSet rs = q.getTable(chosenTable);
 //			Vector res = q.resultSet2Vector(rs);

@@ -39,6 +39,9 @@ public class DBConnection {
 	public DBConnection (String host, String port, String sID) {
 		this.dbLocation = "@" + host + ":" + port + ":" + sID;
 	} 
+	public DBConnection () {
+		this.dbLocation = "@dbsvcs.cs.uno.edu:1521:orcl";
+	}
 	
 	/**
 	 * @param username
