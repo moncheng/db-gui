@@ -75,40 +75,7 @@ public class Queries {
 	 * list the user's table names
 	 */
 	public String[] listQueries() throws SQLException {
-
-		ArrayList al = new ArrayList();
-
-		al.add("1. List a company's workers by names.");
-		al.add("2. List a company's staff by salary in descending order.");
-		al.add("3. List companies' labor cost (total salaries and wage rates by 1920 hours) in descending order.");
-		al.add("4. Find all the jobs a person is currently holding.");
-		al.add("5. List all the workers who are working for a specific project.");
-		al.add("6. List a person's knowledge/skills in a readable format.");
-		al.add("7. List the skill gap of a worker between his/her job(s) and his/her skills.");
-		al.add("8. List the required knowledge/skills of a job profile in a readable format.");
-		al.add("9. List a person's missing knowledge/skills for a specific job in a readable format.");
-		al.add("10. Find the courses each of which alone can cover a given skill set.");
-		al.add("11. List the courses (course id and title) that each alone teaches all the missing knowledge/skills for a person to pursue a specific job.");
-		al.add("12. Suppose the skill gap of a worker and the requirement of a desired job can be covered by one course. Find the 'quickest' solution for this worker. Show the course and the completing date.");
-		al.add("13. If query #10 returns nothing, then find the course sets with the minimum number of courses that their combination covers the given skill set. The considered course sets will not include more than three courses.");
-		al.add("14. List the course sets that their combinations cover all the missing knowledge/skills for a person to pursue a specific job. The considered course sets will not include more than three courses.");
-		al.add("15. Find the cheapest course choices to make up one's skill gap by showing the courses to take and the total cost. The considered course sets will not include more than three courses.");
-		al.add("16. List all the job profiles that a person is qualified.");
-		al.add("17. Find the job with the highest pay rate for a person according to his/her skill qualification.");
-		al.add("18. List all the names along with the emails of the persons who are qualified for a job profile.");
-		al.add("19. When a company cannot find any qualified person for a job, a secondary solution is to find a person who is almost qualified to the job. Make a 'missing-one' list that lists people who miss only one skill for a specified job profile.");
-		al.add("20. List the skillID and the number of people in the missing-one list for a given job profile in the ascending order of the people counts.");
-		al.add("21. Suppose there is a new job profile that has nobody qualified. List the persons who miss the least number of skills and report the 'least number'.");
-		al.add("22. For a specified job profile and a given small number k, make a 'missing-k' list that lists the people's IDs and the number of missing skills for the people who miss only up to k skills in the ascending order of missing skills.");
-		al.add("23. Given a job profile and its corresponding missing-k list specified in Question 22. Find every skill that is needed by at least one person in the given missing-k list. List each skillID and the number of people who need it in the descending order of the people counts.");
-		al.add("24. In a local or national crisis, we need to find all the people who once held a job of the special job-profile identifier.");
-		al.add("25. Find all the unemployed people who once held a job of the given job-profile identifier.");
-		al.add("26. Find out the biggest employer in terms of number of employees or the total amount of salaries and wages paid to employees.");
-
-
-		String[] tn = new String[1];
-		tn = (String[]) al.toArray(tn);
-		return tn;
+		return new ProjectQueries().getQuestionList();
 	}
 
 	/**

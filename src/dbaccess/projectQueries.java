@@ -3,11 +3,11 @@ package dbaccess;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class projectQueries {
+public class ProjectQueries {
 	private ArrayList<String> questions;
 	private ArrayList<String> queries;
 	HashMap<String,String> map;
-	public projectQueries()
+	public ProjectQueries()
 	{
 		this.questions=new ArrayList();
 		this.queries=new ArrayList();
