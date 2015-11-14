@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import dbaccess.DBConnection;
+import dbaccess.ProjectQueries;
 import dbaccess.Queries;
 
 import java.sql.Connection;
@@ -122,10 +123,11 @@ public class QueryView extends javax.swing.JFrame {
 	private void tnJComboActionPerformed(ActionEvent evt) {
 		//System.out.println("tnJCombo.actionPerformed, event=" + evt);
 		String chosenQuery = (String) tnJCombo.getSelectedItem();
-		
-//		String queryString=
+		ProjectQueries queries =new ProjectQueries();
+		String query= queries.getQuery(chosenQuery);
+		System.out.println(query);
 		try {
-			ResultSet rs = q.runSQLQuery("SELECT * FROM company");
+			ResultSet rs = q.runSQLQuery(query);
 			Vector res = q.resultSet2Vector(rs);
 			TableModel tableModel = new DefaultTableModel(res, q.getTitlesAsVector(rs));
 			table.setModel(tableModel);
