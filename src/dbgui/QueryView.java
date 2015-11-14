@@ -42,6 +42,8 @@ public class QueryView extends javax.swing.JFrame {
 	private JComboBox tnJCombo;
 	private JTable table;
 	private JTextArea msgArea;
+	private JTextArea queryArea;
+	private JScrollPane queryPane;
 	private JScrollPane msgPane;
 	private JScrollPane jScrollPane1;
 	private Connection db;
@@ -74,6 +76,16 @@ public class QueryView extends javax.swing.JFrame {
 				tnLabel.setBounds(7, 0, 91, 28);
 			}
 			{
+				queryPane = new JScrollPane();
+				getContentPane().add(queryPane);
+				queryPane.setBounds(7, 92, 861, 40);
+				{
+					queryArea = new JTextArea();
+					queryPane.setViewportView(queryArea);
+					queryArea.setText("query");
+				}
+			}
+			{
 				ComboBoxModel tnJComboModel = new DefaultComboBoxModel(q.listQueries());
 				tnJCombo = new JComboBox();
 				getContentPane().add(tnJCombo);
@@ -91,13 +103,14 @@ public class QueryView extends javax.swing.JFrame {
 											new String[] {"Column 1", "Column 2" });
 				table = new JTable();
 				table.setModel(tableModel);
-				table.setBounds(21, 56, 826, 357);
+				table.setBounds(21, 98, 826, 357);
 			}
 			{
 				jScrollPane1 = new JScrollPane(table);
 				getContentPane().add(jScrollPane1);
-				jScrollPane1.setBounds(7, 98, 861, 329);
+				jScrollPane1.setBounds(7, 135, 861, 329);
 			}
+
 			{
 				msgPane = new JScrollPane();
 				getContentPane().add(msgPane);
@@ -108,10 +121,11 @@ public class QueryView extends javax.swing.JFrame {
 					msgArea.setText("messages from the database system ");
 				}
 			}
+			
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			pack();
-			this.setSize(883, 485);
+			this.setSize(883, 500);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,6 +140,7 @@ public class QueryView extends javax.swing.JFrame {
 		ProjectQueries queries =new ProjectQueries();
 		String query= queries.getQuery(chosenQuery);
 		System.out.println(query);
+		queryArea.setText(query);
 		try {
 			ResultSet rs = q.runSQLQuery(query);
 			Vector res = q.resultSet2Vector(rs);
