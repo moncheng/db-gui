@@ -20,6 +20,7 @@ import dbaccess.Queries;
 import java.sql.Connection;
 import java.sql.ResultSet; 
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 
 /**
@@ -121,18 +122,23 @@ public class QueryView extends javax.swing.JFrame {
 	private void tnJComboActionPerformed(ActionEvent evt) {
 		//System.out.println("tnJCombo.actionPerformed, event=" + evt);
 		String chosenQuery = (String) tnJCombo.getSelectedItem();
-		System.out.println(chosenQuery);
-//		try {
-//			ResultSet rs = q.getTable(chosenTable);
-//			Vector res = q.resultSet2Vector(rs);
-//			TableModel tableModel = new DefaultTableModel(res, q.getTitlesAsVector(rs));
-//			table.setModel(tableModel);
-//			msgArea.append("\nNumber of records in " + chosenTable + " is " + res.size());
-//		} catch (SQLException sqle) {
-//			msgArea.append("\n" + sqle.toString());
-//		}
+		
+//		String queryString=
+		try {
+			ResultSet rs = q.runSQLQuery("SELECT * FROM company");
+			Vector res = q.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, q.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
 	}
 	
+	public ResultSet runSQLQuery(String str) throws SQLException {
+		Statement stmt = db.createStatement();
+		return stmt.executeQuery(str);
+	}	
 	/**
 	* activater
 	*/
