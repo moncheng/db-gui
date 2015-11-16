@@ -27,7 +27,7 @@ import java.util.Vector;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class JobApplyView extends javax.swing.JFrame {
+public class AddEmployeeView extends javax.swing.JFrame {
 	private JTextField nameField;
 	private JButton allJobs;
 	private JButton bestFitJobs;
@@ -42,7 +42,7 @@ public class JobApplyView extends javax.swing.JFrame {
 	/**
 	* constructor takes a reference of a db accesser object 
 	*/
-	public JobApplyView(JobApply ja) {
+	public AddEmployeeView() {
 		super();
 		this.ja = ja;
 		initGUI();

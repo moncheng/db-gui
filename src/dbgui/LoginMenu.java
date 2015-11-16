@@ -328,11 +328,14 @@ public class LoginMenu extends javax.swing.JFrame {
 	}
 	private void companyRecruitButActionPerformed(ActionEvent evt) {
 		//System.out.println("mySQLBut.actionPerformed, event=" + evt);
+		RecruitEmployeeView re = new RecruitEmployeeView();
+		re.setVisible(true);
 
 	}
 	private void addEmployeeButActionPerformed(ActionEvent evt) {
 		//System.out.println("mySQLBut.actionPerformed, event=" + evt);
-
+		AddEmployeeView ae = new AddEmployeeView();
+		ae.setVisible(true);
 	}
 	private void trainingTrackButActionPerformed(ActionEvent evt) {
 		//System.out.println("mySQLBut.actionPerformed, event=" + evt);

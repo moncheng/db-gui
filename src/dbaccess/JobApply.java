@@ -80,25 +80,18 @@ public class JobApply {
 		ResultSet rs = stmt.executeQuery(str);
 		return rs;
 	}
-	public ResultSet getBestFitJobs() throws SQLException {
+	public ResultSet getBestFitJobs(String name) throws SQLException {
 		String str = "SELECT j.pos_code, j.job_title\n" +
 				"FROM job_profile j\n" +
 				"WHERE NOT EXISTS ( (\n" +
-				"            SELECT R.skill_id \t  FROM skill_require R   WHERE R.pos_code=J.pos_code  )           MINUS         (\n" +
-				" SELECT skill_id   FROM  knows_skill  WHERE person_id=2)     )";
+				"            SELECT R.skill_id \t  FROM skill_require R   WHERE R.pos_code=J.pos_code  )           "
+				+ "MINUS         (\n" +
+				" SELECT skill_id   FROM  knows_skill NATURAL JOIN person  WHERE name = '"+ name    +"')     )";
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);
 		return rs;
 	}
-//	/**
-//	 * returns all the jobs in the db
-//	 */
-//	public ResultSet getAllOpenJobs() throws SQLException {
-//		String str = "SELECT * FROM JOB";
-//		Statement stmt = conn.createStatement();
-//		ResultSet rs = stmt.executeQuery(str);
-//		return rs;
-//	}
+
 
 
 	/**
