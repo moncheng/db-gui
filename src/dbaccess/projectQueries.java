@@ -192,7 +192,7 @@ public class ProjectQueries {
 		//17
 		queries.add("SELECT name,email FROM person P  WHERE NOT EXISTS( ( SELECT skill_id FROM skill_require WHERE pos_code=1 ) MINUS ( SELECT skill_id FROM knows_skill K WHERE P.person_id = K.person_id) )");
 		//18
-		queries.add("SELECT person_id FROM knows_skill NATURAL JOIN skill_require GROUP BY(person_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1");
+		queries.add("SELECT person_id FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY(person_id) HAVING  (SELECT COUNT(*) FROM skill_require Where pos_code=1)- COUNT(person_id)=1");
 		//19
 		queries.add("WITH missing_one AS  ( SELECT skill_id  FROM knows_skill NATURAL JOIN skill_require GROUP BY(skill_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1)  SELECT skill_id, COUNT(*) AS personsMissing_count FROM missing_one  GROUP BY (skill_id) ORDER BY personsMissing_count ASC");
 		//20
