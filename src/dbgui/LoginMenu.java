@@ -11,6 +11,7 @@ import javax.swing.WindowConstants;
 
 import dbaccess.DBConnection;
 import dbaccess.JobApply;
+import dbaccess.AddEmployee;
 import dbaccess.Queries;
 import dbaccess.TableInfo;
 import dbaccess.TableUpdate;
@@ -50,6 +51,8 @@ public class LoginMenu extends javax.swing.JFrame {
 	private java.sql.Connection conn;
 	private TableInfo ti;
 	private JobApply ja;
+	private AddEmployee ae;
+
 	private Queries q;
 	private JTextArea msgArea;
 	private JTextField sidField;
@@ -276,6 +279,7 @@ public class LoginMenu extends javax.swing.JFrame {
 			ti = tu.getTableInfo();
 			q = new Queries(conn);
 			ja = new JobApply(conn);
+			ae = new AddEmployee(conn);
 			tabViewBut.setEnabled(true);
 			queryBut.setEnabled(true);
 			tabSelectBut.setEnabled(true);
@@ -334,8 +338,8 @@ public class LoginMenu extends javax.swing.JFrame {
 	}
 	private void addEmployeeButActionPerformed(ActionEvent evt) {
 		//System.out.println("mySQLBut.actionPerformed, event=" + evt);
-		AddEmployeeView ae = new AddEmployeeView();
-		ae.setVisible(true);
+		AddEmployeeView av = new AddEmployeeView(ae);
+		av.setVisible(true);
 	}
 	private void trainingTrackButActionPerformed(ActionEvent evt) {
 		//System.out.println("mySQLBut.actionPerformed, event=" + evt);

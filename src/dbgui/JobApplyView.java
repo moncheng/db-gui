@@ -37,7 +37,7 @@ public class JobApplyView extends javax.swing.JFrame {
 	private JScrollPane msgPane;
 	private JScrollPane jScrollPane1;
 	private JobApply ja;
-	String name;
+	private String name;
 
 	/**
 	* constructor takes a reference of a db accesser object 
