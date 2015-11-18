@@ -47,11 +47,7 @@ INSERT INTO skill VALUES (5, 'teaching', null, 2);
 INSERT INTO skill VALUES (6, 'environment', null, 2);
 INSERT INTO skill VALUES (7, 'marketing', null, 2);
 INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
-INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
-INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
-INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
-INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
-INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
+
 
 
 -- INSERT INTO skill (skill_id, skill_title, description, skill_level); 
@@ -72,6 +68,7 @@ INSERT INTO knows_skill VALUES(4,7);	/*jaqueline nichols knows marketing*/
 INSERT INTO knows_skill VALUES(4,4);	/*jaqueline nichols knows research*/
 INSERT INTO knows_skill VALUES(4,1);  /*jaqueline nichols knows leadership*/
 
+INSERT INTO knows_skill VALUES(5,0);	/*william ray knows beginner's java*/
 INSERT INTO knows_skill VALUES(5,4);	/*william ray knows research*/
 INSERT INTO knows_skill VALUES(5,1);	/*william ray knows leadership*/
 INSERT INTO knows_skill VALUES(5,2);	/*william ray knows java*/
@@ -81,6 +78,20 @@ INSERT INTO knows_skill VALUES(5,7);	/*william ray knows marketing*/
 INSERT INTO knows_skill VALUES(5,8);	/*william ray knows information technology*/
 
 /*which jobs require which skills*/--;
+
+/*all jobs require java for beginners*/
+INSERT INTO skill_require VALUES(1,0);	
+INSERT INTO skill_require VALUES(2,0);	
+INSERT INTO skill_require VALUES(3,0);	
+INSERT INTO skill_require VALUES(4,0);	
+INSERT INTO skill_require VALUES(5,0);	
+INSERT INTO skill_require VALUES(6,0);	
+INSERT INTO skill_require VALUES(7,0);	
+INSERT INTO skill_require VALUES(8,0);	
+INSERT INTO skill_require VALUES(9,0);	
+INSERT INTO skill_require VALUES(10,0);	
+
+
 INSERT INTO skill_require VALUES(1,2);	/*research assistant requires java*/
 INSERT INTO skill_require VALUES(1,4);	/*research assistant requires research*/
 INSERT INTO skill_require VALUES(1,8);	/*research assistant requires Information Technology*/

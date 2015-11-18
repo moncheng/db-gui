@@ -67,6 +67,7 @@ CREATE TABLE job
 	 start_date		date,
 	 end_date		date,
 	 primary key (job_id)
+	 primary key (pos_code)
 	);
 
 CREATE TABLE job_profile

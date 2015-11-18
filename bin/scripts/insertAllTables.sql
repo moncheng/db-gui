@@ -54,9 +54,9 @@ INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
 INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
 
 
--- INSERT INTO skill (skill_id, skill_title, description, skill_level) 
+-- INSERT INTO skill (skill_id, skill_title, description, skill_level); 
 
-/*who knows what skills*/
+/*who knows what skills*/--;
 INSERT INTO knows_skill VALUES(1,1);	/*julia hicks knows leadership*/
 INSERT INTO knows_skill VALUES(1,2);	/*julia hicks knows java*/
 INSERT INTO knows_skill VALUES(1,3);	/*julia hicks knows computation*/
@@ -80,7 +80,7 @@ INSERT INTO knows_skill VALUES(5,5);	/*william ray knows teaching*/
 INSERT INTO knows_skill VALUES(5,7);	/*william ray knows marketing*/
 INSERT INTO knows_skill VALUES(5,8);	/*william ray knows information technology*/
 
-/*which jobs require which skills*/
+/*which jobs require which skills*/--;
 INSERT INTO skill_require VALUES(1,2);	/*research assistant requires java*/
 INSERT INTO skill_require VALUES(1,4);	/*research assistant requires research*/
 INSERT INTO skill_require VALUES(1,8);	/*research assistant requires Information Technology*/
@@ -112,7 +112,7 @@ INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALU
 INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (8, 'Help Desk Technician', 'ajob',30000, 0);
 INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (9, 'Information Systems Manager', 'ajob',30000, 0);
 INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (10, 'Teacher', 'ajob', 30000, 0);
--- job_profile (pos_code, job_title, description,salary,wage_rate)
+-- job_profile (pos_code, job_title, description,salary,wage_rate);
 --job titles
 -- Accounting Clerk
 -- Accounting Clerk Leader
@@ -159,7 +159,7 @@ INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALU
 -- Programmer Analyst
 -- Security Specialist
 
-/*who holds what job*/
+/*who holds what job*/--;
 INSERT INTO job VALUES(11,10,2,1,'full-time','03-APR-2014',null);	/*julia hicks is a teacher for photospace*/
 INSERT INTO job VALUES(1,6,2,1,'full-time','03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
 INSERT INTO job VALUES(2,2,2,5,'full-time','03-APR-2014',null);	/*william ray is general manager for photospace*/
@@ -173,7 +173,7 @@ INSERT INTO work_on VALUES(4,1);	 /*HolyGate's marketing manager for photospace*
 
 INSERT INTO work_on VALUES(11,2);	/*teacher works on Photospace Training*/
 
---course (course_id, course_title, description, status, retail_price)
+--course (course_id, course_title, description, status, retail_price);
 INSERT INTO course VALUES (1, 'Leadership', null, 'true', 19.18);
 INSERT INTO course VALUES (2, 'Java 1', null, 'false', 81.04);
 INSERT INTO course VALUES (3, 'Research Methods', null, 'false', 45.5);
@@ -186,9 +186,9 @@ INSERT INTO course VALUES (9, 'Intro to IT', null, 'true', 88.54);
 INSERT INTO course VALUES (10, 'Advanced Calculus', null, 'false', 91.96);
 INSERT INTO course VALUES(11,'Java 101','entry level java course','open',500);
 INSERT INTO course VALUES(12,'Java 102','entry level java course','open',500);
---course (course_id, course_title, description, status, retail_price)
+--course (course_id, course_title, description, status, retail_price);
 
-/*which course provides which skill*/
+/*which course provides which skill*/--;
 INSERT INTO course_skill VALUES(1,1);	/*leadership from Leadership*/
 INSERT INTO course_skill VALUES(2,2);	/*java from Java I*/
 INSERT INTO course_skill VALUES(4,3);	/*research from Research Methods*/
