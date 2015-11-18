@@ -29,6 +29,7 @@ import java.util.Vector;
 */
 public class JobApplyView extends javax.swing.JFrame {
 	private JTextField nameField;
+	private JTextField jobField;
 	private JButton allJobs;
 	private JButton bestFitJobs;
 	private JButton trainingTrackForJob;
@@ -81,9 +82,9 @@ public class JobApplyView extends javax.swing.JFrame {
 				});
 			}
 			{
-				nameField = new JTextField("Enter the job");
-				getContentPane().add(nameField);
-				nameField.setBounds(14, 110, 119, 28);
+				jobField = new JTextField("Enter the job");
+				getContentPane().add(jobField);
+				jobField.setBounds(14, 110, 119, 28);
 			}
 			{
 				trainingTrackForJob = new JButton();

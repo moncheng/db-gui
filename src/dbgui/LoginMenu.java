@@ -12,6 +12,7 @@ import javax.swing.WindowConstants;
 import dbaccess.DBConnection;
 import dbaccess.JobApply;
 import dbaccess.AddEmployee;
+import dbaccess.RecruitEmployee;
 import dbaccess.Queries;
 import dbaccess.TableInfo;
 import dbaccess.TableUpdate;
@@ -40,7 +41,7 @@ public class LoginMenu extends javax.swing.JFrame {
 	private JButton tabModBut;
 	private JButton tabSelectBut;
 	private JButton jobSearchBut;
-	private JButton companyRecruitBut;
+	private JButton recruitBut;
 	private JButton trainingTrackBut;
 	private JButton addEmployeeBut;
 	private JButton tabViewBut;
@@ -48,11 +49,13 @@ public class LoginMenu extends javax.swing.JFrame {
 	private JTextField passwdField;
 	private JTextField usernameField;
 	
+	/*dbAccess objects*/
 	private java.sql.Connection conn;
 	private TableInfo ti;
 	private JobApply ja;
 	private AddEmployee ae;
-
+	private RecruitEmployee re;
+	
 	private Queries q;
 	private JTextArea msgArea;
 	private JTextField sidField;
@@ -69,6 +72,7 @@ public class LoginMenu extends javax.swing.JFrame {
 	public static void main(String[] args) {
 		LoginMenu inst = new LoginMenu();
 		inst.setVisible(true);
+		
 	}
 	
 	public LoginMenu() {
@@ -191,14 +195,14 @@ public class LoginMenu extends javax.swing.JFrame {
 				});
 			}
 			{
-				companyRecruitBut = new JButton();
-				getContentPane().add(companyRecruitBut);
-				companyRecruitBut.setText("Recruit applicants");
-				companyRecruitBut.setBounds(14, 371, 175, 28);
-				companyRecruitBut.setEnabled(false);
-				companyRecruitBut.addActionListener(new ActionListener() {
+				recruitBut = new JButton();
+				getContentPane().add(recruitBut);
+				recruitBut.setText("Recruit applicants");
+				recruitBut.setBounds(14, 371, 175, 28);
+				recruitBut.setEnabled(false);
+				recruitBut.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						companyRecruitButActionPerformed(evt);
+						recruitButActionPerformed(evt);
 					}
 				});
 			}
@@ -280,13 +284,14 @@ public class LoginMenu extends javax.swing.JFrame {
 			q = new Queries(conn);
 			ja = new JobApply(conn);
 			ae = new AddEmployee(conn);
+			re= new RecruitEmployee(conn);
 			tabViewBut.setEnabled(true);
 			queryBut.setEnabled(true);
 			tabSelectBut.setEnabled(true);
 			tabModBut.setEnabled(true);
 			mySQLBut.setEnabled(true);
 			jobSearchBut.setEnabled(true);
-			companyRecruitBut.setEnabled(true);
+			recruitBut.setEnabled(true);
 			addEmployeeBut.setEnabled(true);
 		} catch (java.sql.SQLException sqle) {
 			StringWriter strMsg = new StringWriter();
@@ -330,10 +335,11 @@ public class LoginMenu extends javax.swing.JFrame {
 		JobApplyView jv = new JobApplyView(ja);
 		jv.setVisible(true);
 	}
-	private void companyRecruitButActionPerformed(ActionEvent evt) {
+	private void recruitButActionPerformed(ActionEvent evt) {
 		//System.out.println("mySQLBut.actionPerformed, event=" + evt);
-		RecruitEmployeeView re = new RecruitEmployeeView();
-		re.setVisible(true);
+		RecruitEmployeeView rev = new RecruitEmployeeView(re);
+		rev.setSize(900, 600);
+		rev.setVisible(true);
 
 	}
 	private void addEmployeeButActionPerformed(ActionEvent evt) {
