@@ -149,6 +149,7 @@ INSERT INTO project VALUES(1,2,'HolyGate');
 INSERT INTO project VALUES(2,2,'Photospace Training');
 
 --course (course_id, course_title, description, status, retail_price);
+INSERT INTO course VALUES (0, 'null', null, 'true', 0.0);
 INSERT INTO course VALUES (1, 'Leadership', null, 'true', 19.18);
 INSERT INTO course VALUES (2, 'Java II', null, 'false', 81.04);
 INSERT INTO course VALUES (3, 'Research Methods', null, 'false', 45.5);

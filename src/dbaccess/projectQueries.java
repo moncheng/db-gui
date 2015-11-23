@@ -102,6 +102,7 @@ public class ProjectQueries {
 				+ "SELECT skill_id FROM course_skill cs "
 				+ "WHERE cs.course_id = c.course_id ))");
 		
+		
 		//11
 		queries.add("SELECT course_id, section_id, end_date FROM ( "
 				+ "WITH missing_skill AS ( "
@@ -193,7 +194,7 @@ public class ProjectQueries {
 				+ "(SELECT retail_price FROM Course C3 WHERE CS.course_id3 = C3.course_id)  )AS total "
 				+ "FROM CourseSet CS NATURAL JOIN Cover_CSEt ) "
 				+ "/* to find the cheapest sets */ "
-				+ "SELECT * FROM total_cost ORDER BY total DESC FETCH FIRST 3 ROWS ONLY))");//15
+				+ "SELECT * FROM total_cost ORDER BY total ASC FETCH FIRST 3 ROWS ONLY))");//15
 		queries.add("SELECT j.pos_code, j.job_title "
 				+ "FROM job_profile j WHERE NOT EXISTS (   "
 				+ "( SELECT R.skill_id  FROM skill_require R  WHERE R.pos_code=J.pos_code )"
