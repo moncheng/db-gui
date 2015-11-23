@@ -52,38 +52,142 @@ public class ProjectQueries {
 	}
 	public void addQueries()
 	{
-		queries.add("SELECT name FROM job NATURAL JOIN person WHERE company_id = 2");
+		queries.add("SELECT DISTINCT name FROM person NATURAL JOIN job WHERE company_id = 2");
 		//1
-		queries.add("SELECT salary FROM job NATURAL JOIN job_profile WHERE company_id=2 AND job_type='full-time' ORDER BY salary DESC");
+		queries.add("SELECT name, job_title, salary FROM person NATURAL JOIN job NATURAL JOIN job_profile "
+				+ "WHERE company_id=2 AND job_type='full-time' ORDER BY salary DESC");
 		//2
-		queries.add("SELECT company_id,(SUM(salary)+SUM(wage_rate*1920)) AS total FROM job NATURAL JOIN job_profile GROUP BY (company_id)");
+		queries.add("SELECT company_name,(SUM(salary)+SUM(wage_rate*1920)) AS total "
+				+ "FROM company NATURAL JOIN job NATURAL JOIN job_profile GROUP BY (company_name)");
 		//3
-		queries.add("SELECT job_title FROM job NATURAL JOIN job_profile WHERE person_id = 1");
+		queries.add("SELECT name, job_title FROM person NATURAL JOIN job NATURAL JOIN job_profile WHERE person_id = 1");
 		//4
-		queries.add("SELECT name FROM person natural join work_on WHERE project_id = 1");
+		queries.add("SELECT name FROM work_on NATURAL JOIN person NATURAL JOIN job WHERE project_id = 1");
 		//5
-		queries.add("SELECT name, skill_title, description FROM person NATURAL JOIN knows_skill NATURAL JOIN skill WHERE person_id = 1");
+		queries.add("SELECT name, skill_title, description FROM person NATURAL JOIN knows_skill NATURAL JOIN skill "
+				+ "WHERE person_id = 1");
 		//6
-		queries.add("( SELECT skill_id FROM SKILL_REQUIRE WHERE job_id = (SELECT job_id FROM job WHERE person_id = 1) ) MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 1)");
+		queries.add("SELECT skill_id FROM "
+				+ "(SELECT skill_id FROM SKILL_REQUIRE NATURAL JOIN job_profile NATURAL JOIN job "
+				+ "WHERE job_id = (SELECT job_id FROM job WHERE person_id = 2) )"
+				+ "MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 2)");
 		//7
-		queries.add("SELECT skill_title FROM job NATURAL JOIN skill_require NATURAL JOIN skill WHERE job_title = 1");
+		queries.add("SELECT skill_title FROM job NATURAL JOIN skill_require NATURAL JOIN skill WHERE job_id = 1");
 		//8
-		queries.add("(SELECT skill_id FROM skill_require WHERE pos_code = 1) MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 1)");
+		queries.add("SELECT skill_id FROM "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) "
+				+ "MINUS "
+				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 2)");
 		//9
-		queries.add("SELECT course_id, title FROM course c WHERE NOT EXISTS( SELECT skill_id FROM skill MINUS SELECT skill_id FROM course_skill cs WHERE cs.course_id = c.course_id )");
+		//not correct : queries.add("SELECT course_id, title FROM course c WHERE NOT EXISTS( SELECT skill_id FROM skill MINUS SELECT skill_id FROM course_skill cs WHERE cs.course_id = c.course_id )");
+		queries.add("");
 		//10
-		queries.add("WITH missing_skill AS( (SELECT skill_id FROM skill_require WHERE pos_code = 1) MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 1)) SELECT course_id, title FROM course c WHERE NOT EXISTS( SELECT skill_id FROM missing_skill MINUS SELECT skill_idsiz FROM course_skill cs WHERE cs.course_id = c.course_id )");
-		//11
-		queries.add("WITH missing_skill AS ( (SELECT skill_id FROM skill_require WHERE pos_code = 1) MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 1 )), possible_courses AS ( SELECT course_id FROM course c WHERE NOT EXISTS( (SELECT skill_id FROM missing_skill) MINUS (SELECT skill_id FROM course_skill cs WHERE cs.course_id = c.course_id)) SELECT course_id, section_id FROM course NATURAL JOIN section  WHERE section_id = (SELECT s.section_id  FROM missing_skill, section s WHERE s.end_date = (SELECT MIN(end_date) FROM possible_courses NATURAL JOIN section))");
-		//12
-		queries.add("WITH missing_skill AS((SELECT skill_idFROM skill_require WHERE pos_code = 1) MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 1 ) ),CourseSet_Skill(csetID, skill_id) AS ( SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id1=CS.course_id UNION SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id2=CS.course_id UNION SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id3=CS.course_id ), Cover_CSet(csetID, siz) AS ( SELECT csetID, siz FROM CourseSet CSet WHERE NOT EXISTS ( SELECT skill_id FROM Missing_Skill MINUS SELECT skill_id FROM CourseSet_Skill CSSk WHERE CSSk.csetID = Cset.csetID )) SELECT course_id1, course_id2, course_id3 FROM Cover_CSet NATURAL JOIN CourseSet WHERE siz = (SELECT MIN(siz) FROM Cover_CSet)");
-		//13
-		queries.add("not sure ");
-		//14
-		queries.add("not sure");
-		//15
-		queries.add("SELECT j.pos_code, j.job_title FROM job_profile j WHERE NOT EXISTS ( ( SELECT R.skill_id  FROM skill_require R  WHERE R.pos_code=J.pos_code ) MINUS ( SELECT skill_id  FROM  knows_skill WHERE person_id=2 ))");
-		//16
+		queries.add("SELECT course_id, course_title FROM( "
+				+ "WITH missing_skill AS( "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) "
+				+ "MINUS "
+				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 1) ) "
+				+ "SELECT course_id, course_title FROM course c "
+				+ "WHERE NOT EXISTS( SELECT skill_id FROM missing_skill "
+				+ "MINUS "
+				+ "SELECT skill_id FROM course_skill cs "
+				+ "WHERE cs.course_id = c.course_id ))");//11
+		queries.add("SELECT course_id, section_id, end_date FROM ( "
+				+ "WITH missing_skill AS ( "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1)"
+				+ " MINUS"
+				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 1 ) ), "
+				+ "possible_courses AS ( "
+				+ "SELECT course_id FROM course c "
+				+ "WHERE NOT EXISTS( "
+				+ "(SELECT skill_id FROM missing_skill) "
+				+ "MINUS "
+				+ "(SELECT skill_id FROM course_skill cs "
+				+ "WHERE cs.course_id = c.course_id) ) ) "
+				+ "SELECT course_id, section_id, end_date "
+				+ "FROM possible_courses NATURAL JOIN section "
+				+ "ORDER BY end_date ASC "
+				+ "FETCH FIRST 1 ROWS ONLY )");	//12
+
+		queries.add("SELECT course_id1, course_id2, course_id3 FROM "
+				+ "(WITH missing_skill AS (  "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) "
+				+ "MINUS  "
+				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 2 ) ), "
+				+ "CourseSet_Skill(csetID, skill_id) AS ( "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id1=CS.course_id "
+				+ "UNION "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id2=CS.course_id "
+				+ "UNION "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id3=CS.course_id ), "
+				+ "/* use division to find those course sets that cover missing skills */ "
+				+ "Cover_CSet(csetID, siz) AS ( "
+				+ "SELECT csetID, siz FROM CourseSet CSet "
+				+ "WHERE NOT EXISTS ( "
+				+ "SELECT skill_id FROM Missing_Skill "
+				+ "MINUS "
+				+ "SELECT skill_id FROM CourseSet_Skill CSSk WHERE CSSk.csetID = Cset.csetID ) ) "
+				+ "/* to find the smallest sets */ "
+				+ "SELECT course_id1, course_id2, course_id3 "
+				+ "FROM Cover_CSet NATURAL JOIN CourseSet "
+				+ "WHERE siz = (SELECT MIN(siz) FROM Cover_CSet) )");//13
+		queries.add("SELECT course_id1, course_id2, course_id3 FROM "
+				+ "(WITH missing_skill AS ( "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) "
+				+ "MINUS"
+				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 2 ) ), "
+				+ "CourseSet_Skill(csetID, skill_id) AS ( "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id1=CS.course_id "
+				+ "UNION "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id2=CS.course_id "
+				+ "UNION SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id3=CS.course_id ), "
+				+ "/* use division to find those course sets that cover missing skills */ "
+				+ "Cover_CSet(csetID, siz) AS ( "
+				+ "SELECT csetID, siz FROM CourseSet CSet WHERE NOT EXISTS "
+				+ "( SELECT skill_id FROM Missing_Skill "
+				+ "MINUS "
+				+ "SELECT skill_id FROM CourseSet_Skill CSSk "
+				+ "WHERE CSSk.csetID = Cset.csetID ) ) "
+				+ "/* to find the  sets */ "
+				+ "SELECT course_id1, course_id2, course_id3 "
+				+ "FROM Cover_CSet NATURAL JOIN CourseSet) ");//14
+		queries.add("SELECT * FROM CourseSet NATURAL JOIN ( "
+				+ "SELECT csetID, total FROM ("
+				+ "WITH missing_skill AS ( "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) "
+				+ "MINUS "
+				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 2 ) ), "
+				+ "CourseSet_Skill(csetID, skill_id) AS ( "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id1=CS.course_id "
+				+ "UNION "
+				+ "SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id2=CS.course_id "
+				+ "UNION "
+				+ "SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id3=CS.course_id ), "
+				+ "/* use division to find those course sets that cover missing skills */"
+				+ " Cover_CSet(csetID, siz) AS ( "
+				+ "SELECT csetID, siz FROM CourseSet CSet WHERE NOT EXISTS ( "
+				+ "SELECT skill_id FROM Missing_Skill "
+				+ "MINUS "
+				+ "SELECT skill_id FROM CourseSet_Skill CSSk WHERE CSSk.csetID = Cset.csetID ) ), "
+				+ "total_cost AS ( SELECT csetID, ( "
+				+ "(SELECT retail_price FROM Course C1 WHERE CS.course_id1 = C1.course_id) + "
+				+ "(SELECT retail_price FROM Course C2 WHERE CS.course_id2 = C2.course_id) + "
+				+ "(SELECT retail_price FROM Course C3 WHERE CS.course_id3 = C3.course_id)  )AS total "
+				+ "FROM CourseSet CS NATURAL JOIN Cover_CSEt ) "
+				+ "/* to find the cheapest sets */ "
+				+ "SELECT * FROM total_cost ORDER BY total DESC FETCH FIRST 3 ROWS ONLY))");//15
+		queries.add("SELECT j.pos_code, j.job_title "
+				+ "FROM job_profile j WHERE NOT EXISTS (   "
+				+ "( SELECT R.skill_id  FROM skill_require R  WHERE R.pos_code=J.pos_code )"
+				+ " MINUS "
+				+ "( SELECT skill_id  FROM  knows_skill WHERE person_id=5 ) )");//16
 		queries.add("SELECT j.pos_code, MAX(salary+(wage_rate*1920)) AS max_income FROM job_profile j WHERE NOT EXISTS ( ( SELECT R.skill_id  FROM skill_require R  WHERE J.pos_code=R.pos_code) MINUS ( SELECT skill_id  FROM  knows_skill WHERE person_id=4 ) ) GROUP BY (pos_code)");
 		//17
 		queries.add("SELECT name,email FROM person P  WHERE NOT EXISTS( ( SELECT skill_id FROM skill_require WHERE pos_code=1 ) MINUS ( SELECT skill_id FROM knows_skill K WHERE P.person_id = K.person_id) )");
