@@ -82,16 +82,28 @@ public class ProjectQueries {
 		//not correct : queries.add("SELECT course_id, title FROM course c WHERE NOT EXISTS( SELECT skill_id FROM skill MINUS SELECT skill_id FROM course_skill cs WHERE cs.course_id = c.course_id )");
 		queries.add("");
 		//10
+//		queries.add("SELECT course_id, course_title FROM( "
+//				+ "WITH missing_skill AS( "
+//				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) "
+//				+ "MINUS "
+//				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 1) ) "
+//				+ "SELECT course_id, course_title FROM course c "
+//				+ "WHERE NOT EXISTS( SELECT skill_id FROM missing_skill "
+//				+ "MINUS "
+//				+ "SELECT skill_id FROM course_skill cs "
+//				+ "WHERE cs.course_id = c.course_id ))");
+		// need no need to Minus with person knows id. check the question again, only require cover set of skills.
 		queries.add("SELECT course_id, course_title FROM( "
 				+ "WITH missing_skill AS( "
-				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) "
-				+ "MINUS "
-				+ "(SELECT skill_id FROM knows_skill WHERE person_id = 1) ) "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1) )"
 				+ "SELECT course_id, course_title FROM course c "
 				+ "WHERE NOT EXISTS( SELECT skill_id FROM missing_skill "
 				+ "MINUS "
 				+ "SELECT skill_id FROM course_skill cs "
-				+ "WHERE cs.course_id = c.course_id ))");//11
+				+ "WHERE cs.course_id = c.course_id ))");
+		
+		
+		//11
 		queries.add("SELECT course_id, section_id, end_date FROM ( "
 				+ "WITH missing_skill AS ( "
 				+ "(SELECT skill_id FROM skill_require WHERE pos_code = 1)"
