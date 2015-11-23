@@ -208,9 +208,10 @@ public class ProjectQueries {
 		//19
 		queries.add("WITH missing_one AS  ( SELECT skill_id  FROM knows_skill NATURAL JOIN skill_require GROUP BY(skill_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1)  SELECT skill_id, COUNT(*) AS personsMissing_count FROM missing_one  GROUP BY (skill_id) ORDER BY personsMissing_count ASC");
 		//20
-		queries.add("WITH number_needs(person_id,needs) AS (  (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require GROUP BY (person_id) ) ) SELECT person_id,needs FROM  number_needs WHERE needs= (SELECT MIN(needs)  FROM number_needs)");
+		queries.add("WITH number_needs(person_id,needs) AS (  (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require WHERE pos_code = 1 GROUP BY (person_id) ) ) SELECT person_id,needs FROM  number_needs WHERE needs= (SELECT MIN(needs)  FROM number_needs)");
+
 		//21
-		queries.add("WITH number_needs(person_id,needs) AS ( (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require GROUP BY (person_id) ) ) SELECT person_id,needs FROM number_needs WHERE needs <=2 ORDER BY needs ASC");
+		queries.add("WITH number_needs(person_id,needs) AS ( (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require WHERE pos_id = 1 GROUP BY (person_id) ) ) SELECT person_id,needs FROM number_needs WHERE needs <=2 UNION SELECT person_id, (SELECT count(*) FROM skill_require WHERE pos_code=1) FROM person P WHERE P.person_id not in (select person_id from number_needs) ORDER BY needs ASC");
 		//22
 		queries.add("WITH missing_one AS  ( SELECT skill_id  FROM knows_skill NATURAL JOIN skill_require GROUP BY(skill_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1) SELECT skill_id, COUNT(*) AS personsMissing_count FROM missing_one  GROUP BY (skill_id) ORDER BY personsMissing_count DESC");
 		//23
