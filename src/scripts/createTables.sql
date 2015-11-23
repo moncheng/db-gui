@@ -64,6 +64,8 @@ CREATE TABLE job
 	 company_id     number(10),
 	 person_id		number(10) NOT null,
 	 job_type		varchar(20),
+	 salary			number(10,0),
+	 wage_rate		number(4,2),
 	 start_date		date,
 	 end_date		date,
 	 primary key (job_id, pos_code)
@@ -73,8 +75,6 @@ CREATE TABLE job_profile
 	(pos_code		number(10), 
 	 job_title			varchar(30) NOT null,
 	 description	varchar(255),  
-	 salary			number(10,0),
-	 wage_rate		number(4,2),
 	 primary key (pos_code)
 	);
 

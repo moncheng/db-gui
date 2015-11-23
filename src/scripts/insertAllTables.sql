@@ -110,17 +110,17 @@ INSERT INTO skill_require VALUES(6,8);	/*Web Developer II requires information t
 INSERT INTO skill_require VALUES(10,5);	/*Teacher requires teaching*/
 
 
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (1, 'Research Assistant I', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (2, 'General Manager', 'ajob',205000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (3, 'Business Development Analyst', 'ajob',65000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (4, 'Systems Administrator III', 'ajob',85000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (5, 'Marketing Manager', 'ajob',35000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (6, 'Web Developer II', 'ajob',100000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (7, 'Environmental Specialist', 'ajob',20000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (8, 'Help Desk Technician', 'ajob',15000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (9, 'Information Systems Manager', 'ajob',45000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (10, 'Teacher', 'ajob', 35000, 0);
--- job_profile (pos_code, job_title, description,salary,wage_rate);
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (1, 'Research Assistant I', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (2, 'General Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (3, 'Business Development Analyst', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (4, 'Systems Administrator III', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (5, 'Marketing Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (6, 'Web Developer II', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (7, 'Environmental Specialist', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (8, 'Help Desk Technician', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (9, 'Information Systems Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (10, 'Teacher', 'ajob');
+-- job_profile (pos_code, job_title, description);
 --job titles
 -- Accounting Clerk
 -- Accounting Clerk Leader
@@ -168,11 +168,11 @@ INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALU
 -- Security Specialist
 
 /*who holds what job*/--;
-INSERT INTO job VALUES(11,10,2,1,'full-time','03-APR-2014',null);	/*julia hicks is a teacher for photospace*/
-INSERT INTO job VALUES(1,6,2,1,'full-time','03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
-INSERT INTO job VALUES(2,2,2,5,'full-time','03-APR-2014',null);	/*william ray is general manager for photospace*/
-INSERT INTO job VALUES(3,1,2,2,'full-time','03-APR-2014',null);	/*mark lee is a research assistant for photospace*/
-INSERT INTO job VALUES(4,5,2,4,'full-time','03-APR-2014',null);	/*jaqueline nichols is a marketing manager for photospace*/
+INSERT INTO job VALUES(11,10,2,1,'full-time', 30000, 0, '03-APR-2014',null);	/*julia hicks is a teacher for photospace*/
+INSERT INTO job VALUES(1,6,2,1,'full-time', 100000, 0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
+INSERT INTO job VALUES(2,2,2,5,'full-time', 350000, 0, '03-APR-2014',null);	/*william ray is general manager for photospace*/
+INSERT INTO job VALUES(3,1,2,2,'full-time', 20000, 0, '03-APR-2014',null);	/*mark lee is a research assistant for photospace*/
+INSERT INTO job VALUES(4,5,2,4,'full-time', 45000, 0, '03-APR-2014',null);	/*jaqueline nichols is a marketing manager for photospace*/
 
 INSERT INTO work_on VALUES(1,1);	/*HolyGate's developer II for photospace*/
 INSERT INTO work_on VALUES(2,1);	/*HolyGate's general manager for photospace*/

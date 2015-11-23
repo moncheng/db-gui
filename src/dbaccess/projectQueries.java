@@ -58,7 +58,7 @@ public class ProjectQueries {
 				+ "WHERE company_id=2 AND job_type='full-time' ORDER BY salary DESC");
 		//2
 		queries.add("SELECT company_name,(SUM(salary)+SUM(wage_rate*1920)) AS total "
-				+ "FROM company NATURAL JOIN job NATURAL JOIN job_profile GROUP BY (company_name)");
+				+ "FROM company NATURAL JOIN job GROUP BY (company_name)");
 		//3
 		queries.add("SELECT name, job_title FROM person NATURAL JOIN job NATURAL JOIN job_profile WHERE person_id = 1");
 		//4
