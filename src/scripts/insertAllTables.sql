@@ -7,10 +7,7 @@ INSERT INTO company VALUES (6, 'Fiveclub', '8', 'Johnson', 'Saint Paul', 'Minnes
 INSERT INTO company VALUES (7, 'Bubblebox', '25120', '3rd', 'Lubbock', 'Texas', '79452', 'reddit.com');
 INSERT INTO company VALUES (8, 'Tazz', '4166', 'Hooker', 'Louisville', 'Kentucky', '40225', 'archive.org');
 INSERT INTO company VALUES (9, 'Voonder', '4', 'Melby', 'Louisville', 'Kentucky', '40205', 'samsung.com');
-INSERT INTO company VALUES (10, 'Edgeclub', '61', 'American', 'Chicago', 'Illinois', '60686', 'google.it');
-	
-INSERT INTO project VALUES(1,2,'HolyGate');	
-INSERT INTO project VALUES(2,2,'Photospace Training');	
+INSERT INTO company VALUES (10, 'Edgeclub', '61', 'American', 'Chicago', 'Illinois', '60686', 'google.it');	
 
 INSERT INTO person VALUES (1, 'Julia Hicks', '96', 'Comanche', 'London', 'Kentucky', '40745', 'Male', 'jhicks0@scientificamerican.com');
 INSERT INTO person VALUES (2, 'Mark Lee', '97', 'Kipling', 'Cincinnati', 'Ohio', '45999', 'Female', 'mlee1@qq.com');
@@ -38,7 +35,7 @@ insert into person values (23, 'Jean Harvey', '42', 'Buhler', 'New York City', '
 insert into person values (24, 'Gerald Meyer', '957', 'Dunning', 'Van Nuys', 'California', '91499', 'Male', 'gmeyern@surveymonkey.com');
 insert into person values (25, 'Albert Garza', '95', 'Emmet', 'San Francisco', 'California', '94177', 'Female', 'agarzao@discovery.com');
 
-INSERT INTO skill VALUES (0,'Java for beginner','high level programming language','entry');	
+INSERT INTO skill VALUES (0,'Java beginner','high level programming language','entry');	
 INSERT INTO skill VALUES (1, 'leadership', null, 3);
 INSERT INTO skill VALUES (2, 'java', null, 3);
 INSERT INTO skill VALUES (3, 'computaion', null, 1);
@@ -114,15 +111,15 @@ INSERT INTO skill_require VALUES(10,5);	/*Teacher requires teaching*/
 
 
 INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (1, 'Research Assistant I', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (2, 'General Manager', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (3, 'Business Development Analyst', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (4, 'Systems Administrator III', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (5, 'Marketing Manager', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (6, 'Web Developer II', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (7, 'Environmental Specialist', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (8, 'Help Desk Technician', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (9, 'Information Systems Manager', 'ajob',30000, 0);
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (10, 'Teacher', 'ajob', 30000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (2, 'General Manager', 'ajob',205000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (3, 'Business Development Analyst', 'ajob',65000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (4, 'Systems Administrator III', 'ajob',85000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (5, 'Marketing Manager', 'ajob',35000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (6, 'Web Developer II', 'ajob',100000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (7, 'Environmental Specialist', 'ajob',20000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (8, 'Help Desk Technician', 'ajob',15000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (9, 'Information Systems Manager', 'ajob',45000, 0);
+INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (10, 'Teacher', 'ajob', 35000, 0);
 -- job_profile (pos_code, job_title, description,salary,wage_rate);
 --job titles
 -- Accounting Clerk
@@ -184,9 +181,12 @@ INSERT INTO work_on VALUES(4,1);	 /*HolyGate's marketing manager for photospace*
 
 INSERT INTO work_on VALUES(11,2);	/*teacher works on Photospace Training*/
 
+INSERT INTO project VALUES(1,2,'HolyGate');	
+INSERT INTO project VALUES(2,2,'Photospace Training');
+
 --course (course_id, course_title, description, status, retail_price);
 INSERT INTO course VALUES (1, 'Leadership', null, 'true', 19.18);
-INSERT INTO course VALUES (2, 'Java 1', null, 'false', 81.04);
+INSERT INTO course VALUES (2, 'Java II', null, 'false', 81.04);
 INSERT INTO course VALUES (3, 'Research Methods', null, 'false', 45.5);
 INSERT INTO course VALUES (4, 'Education', null, 'false', 31.79);
 INSERT INTO course VALUES (5, 'Environment', null, 'false', 29.57);
@@ -199,14 +199,22 @@ INSERT INTO course VALUES(11,'Java 101','entry level java course','open',500);
 INSERT INTO course VALUES(12,'Java 102','entry level java course','open',500);
 --course (course_id, course_title, description, status, retail_price);
 
-/*which course provides which skill*/--;
+/*which course provides which skill, skill_id, course_id*/--;
 INSERT INTO course_skill VALUES(1,1);	/*leadership from Leadership*/
-INSERT INTO course_skill VALUES(2,2);	/*java from Java I*/
+
+INSERT INTO course_skill VALUES(2,2);	/*java from Java II*/
+INSERT INTO course_skill VALUES(0,2);	/*java beginner from java II*/
+INSERT INTO course_skill VALUES(4,2);	/*research from java II*/
+
 INSERT INTO course_skill VALUES(4,3);	/*research from Research Methods*/
 INSERT INTO course_skill VALUES(5,4);	/*teaching from Education*/
 INSERT INTO course_skill VALUES(3,7);	/*computation from calculus*/
 INSERT INTO course_skill VALUES(8,9);	/*information technology from Intro to IT*/
 
+
+INSERT INTO section VALUES(10, 2, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2016', '03-JUN-2017','Dr. Tu'); /*Java II from Dr. TU */
+INSERT INTO section VALUES(11, 2, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2017', '03-JUN-2018','Dr. Tu'); /*Java II from Dr. TU */
+INSERT INTO section VALUES(12, 2, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2018', '03-JUN-2019','Dr. Tu'); /*Java II from Dr. TU */
 
 INSERT INTO section VALUES(1, 1, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2016', '03-JUN-2017','Mr. President'); /*leadership from Mr. President*/
 INSERT INTO section VALUES(2, 1, TO_DSINTERVAL('0 14:00:00'),TO_DSINTERVAL('0 15:00:00'),'03-JAN-2016', '03-MAY-2017','Mr. President'); /*leadership from Mr. President*/
@@ -263,3 +271,13 @@ INSERT INTO phone_number VALUES(13,1,646,3345551);
 INSERT INTO phone_number VALUES(14,1,917,2223333);
 INSERT INTO phone_number VALUES(15,1,985,1115522);
 
+/* two-course set */
+INSERT INTO CourseSet
+				SELECT CourseSet_seq.NEXTVAL, C1.course_id, C2.course_id, null, 2
+				FROM Course C1, Course C2
+				WHERE C1.course_id < C2.course_id;
+/* three-course set */
+				INSERT INTO CourseSet
+				SELECT CourseSet_seq.NEXTVAL, C1.course_id, C2.course_id, C3.course_id, 3
+				FROM Course C1, Course C2, Course C3
+				WHERE C1.course_id < C2.course_id AND C2.course_id < C3.course_id; 
