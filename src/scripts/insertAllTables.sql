@@ -50,6 +50,7 @@ INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
 -- INSERT INTO skill (skill_id, skill_title, description, skill_level); 
 
 /*who knows what skills*/--;
+INSERT INTO knows_skill VALUES(1,0);	/*julia hicks knows beginning java*/
 INSERT INTO knows_skill VALUES(1,1);	/*julia hicks knows leadership*/
 INSERT INTO knows_skill VALUES(1,2);	/*julia hicks knows java*/
 INSERT INTO knows_skill VALUES(1,3);	/*julia hicks knows computation*/
@@ -120,52 +121,15 @@ INSERT INTO job_profile (pos_code, job_title, description) VALUES (7, 'Environme
 INSERT INTO job_profile (pos_code, job_title, description) VALUES (8, 'Help Desk Technician', 'ajob');
 INSERT INTO job_profile (pos_code, job_title, description) VALUES (9, 'Information Systems Manager', 'ajob');
 INSERT INTO job_profile (pos_code, job_title, description) VALUES (10, 'Teacher', 'ajob');
--- job_profile (pos_code, job_title, description);
---job titles
--- Accounting Clerk
--- Accounting Clerk Leader
--- Accounting Director
--- Accounting Manager
--- Accounting Supervisor
--- Budget Manager
--- Bursar
--- Certified Public Accountant
--- Corporate Accountant
--- Cost Accountant
--- Director of Financial Operations
--- Industrial Accountant
--- Information Technology Audit Manager
--- Information Technology Auditor
--- Private Accountant
--- Public Accountant
--- Revenue Cycle Administrator
--- Revenue Cycle Manager
--- Senior Cash Management Analyst
--- Senior Financial Analyst
--- Senior General Audit Manager
--- Assistant Project Manager
--- Building Inspector
--- Carpenter
--- Civil Engineer
--- Concrete Laborers
--- Construction Assistant
--- Construction Coordinator
--- Construction Engineer
--- Construction Foreman
--- Construction Manager
--- Application Support Analyst
--- Applications Engineer
--- Associate Developer
--- Computer Systems Manager
--- Customer Support Administrator
--- Customer Support Specialist
--- Front End Developer
--- Help Desk Specialist
--- Help Desk Technician
--- Information Technology Coordinator
--- Programmer
--- Programmer Analyst
--- Security Specialist
+
+
+/*vacant jobs*/
+INSERT INTO job VALUES(50,3,2,0,'full-time', 10001, 0, null ,null);	/*Business Development Analyst for photospace*/
+INSERT INTO job VALUES(51,4,2,0,'full-time', 10002, 0, null ,null);	/*Systems Administrator III for photospace*/
+INSERT INTO job VALUES(52,7,2,0,'full-time', 10003, 0, null ,null);	/*Environmental Specialist for photospace*/
+INSERT INTO job VALUES(53,8,2,0,'full-time', 10004, 0, null ,null);	/*Help Desk Technician for photospace*/
+INSERT INTO job VALUES(54,9,2,0,'full-time', 10005, 0, null ,null);	/*Information Systems Manager for photospace*/
+
 
 /*who holds what job*/--;
 INSERT INTO job VALUES(11,10,2,1,'full-time', 30000, 0, '03-APR-2014',null);	/*julia hicks is a teacher for photospace*/

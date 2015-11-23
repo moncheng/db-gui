@@ -62,7 +62,7 @@ CREATE TABLE job
 	(job_id			number(10), 
 	 pos_code		number(10) NOT null,
 	 company_id     number(10),
-	 person_id		number(10) NOT null,
+	 person_id		number(10),
 	 job_type		varchar(20),
 	 salary			number(10,0),
 	 wage_rate		number(4,2),
