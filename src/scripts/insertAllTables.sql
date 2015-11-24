@@ -37,7 +37,7 @@ insert into person values (25, 'Albert Garza', '95', 'Emmet', 'San Francisco', '
 
 INSERT INTO skill VALUES (0,'Java beginner','high level programming language','entry');	
 INSERT INTO skill VALUES (1, 'leadership', null, 3);
-INSERT INTO skill VALUES (2, 'java', null, 3);
+INSERT INTO skill VALUES (2, 'java II', null, 3);
 INSERT INTO skill VALUES (3, 'computaion', null, 1);
 INSERT INTO skill VALUES (4, 'research', null, 3);
 INSERT INTO skill VALUES (5, 'teaching', null, 2);
@@ -52,9 +52,34 @@ INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
 /*who knows what skills*/--;
 INSERT INTO knows_skill VALUES(1,0);	/*julia hicks knows beginning java*/
 INSERT INTO knows_skill VALUES(1,1);	/*julia hicks knows leadership*/
-INSERT INTO knows_skill VALUES(1,2);	/*julia hicks knows java*/
+INSERT INTO knows_skill VALUES(1,2);	/*julia hicks knows java II*/
 INSERT INTO knows_skill VALUES(1,3);	/*julia hicks knows computation*/
 INSERT INTO knows_skill VALUES(1,8);	/*julia hicks knows information technology*/
+
+INSERT INTO knows_skill VALUES(25,0);	/*Albert Garza knows beginning java*/
+INSERT INTO knows_skill VALUES(25,1);	/*Albert Garza knows leadership*/
+INSERT INTO knows_skill VALUES(25,2);	/*Albert Garza knows java II*/
+INSERT INTO knows_skill VALUES(25,3);	/*Albert Garza knows computation*/
+INSERT INTO knows_skill VALUES(25,8);	/*Albert Garza knows information technology*/
+
+INSERT INTO knows_skill VALUES(24,0);	/*Gerald Meyer knows beginning java*/
+INSERT INTO knows_skill VALUES(24,1);	/*Gerald Meyer knows leadership*/
+INSERT INTO knows_skill VALUES(24,2);	/*Gerald Meyer knows java II*/
+INSERT INTO knows_skill VALUES(24,3);	/*Gerald Meyer knows computation*/
+INSERT INTO knows_skill VALUES(24,8);	/*Gerald Meyer knows information technology*/
+
+INSERT INTO knows_skill VALUES(23,0);	/*Gerald Meyer knows beginning java*/
+INSERT INTO knows_skill VALUES(23,4);	/*Gerald Meyer knows research*/
+INSERT INTO knows_skill VALUES(23,1);	/*Gerald Meyer knows leadership*/
+INSERT INTO knows_skill VALUES(23,3);	/*Gerald Meyer knows computation*/
+INSERT INTO knows_skill VALUES(23,8);	/*Gerald Meyer knows information technology*/
+
+INSERT INTO knows_skill VALUES(22,0);	/*Gerald Meyer knows beginning java*/
+INSERT INTO knows_skill VALUES(22,4);	/*Gerald Meyer knows research*/
+INSERT INTO knows_skill VALUES(22,1);	/*Gerald Meyer knows leadership*/
+INSERT INTO knows_skill VALUES(22,3);	/*Gerald Meyer knows computation*/
+INSERT INTO knows_skill VALUES(22,8);	/*Gerald Meyer knows information technology*/
+
 
 INSERT INTO knows_skill VALUES(2,1);/*mark lee knows leadership*/
 INSERT INTO knows_skill VALUES(2,4);/*mark lee knows research*/
