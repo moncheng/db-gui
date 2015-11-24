@@ -32,7 +32,8 @@ public class JobApplyView extends javax.swing.JFrame {
 	private JTextField jobField;
 	private JButton allJobs;
 	private JButton bestFitJobs;
-	private JButton trainingTrackForJob;
+	private JButton coursesToCoverGap;
+	private JButton cheepestCourseListToCoverGap;
 	private JTable table;
 	private JTextArea msgArea;
 	private JScrollPane msgPane;
@@ -82,18 +83,30 @@ public class JobApplyView extends javax.swing.JFrame {
 				});
 			}
 			{
-				jobField = new JTextField("Enter the job");
+				jobField = new JTextField("Enter the job pos_code");
 				getContentPane().add(jobField);
 				jobField.setBounds(14, 110, 119, 28);
 			}
 			{
-				trainingTrackForJob = new JButton();
-				getContentPane().add(trainingTrackForJob);
-				trainingTrackForJob.setText("Training track for job");
-				trainingTrackForJob.setBounds(14, 145, 175, 28);
-				trainingTrackForJob.addActionListener(new ActionListener() {
+				coursesToCoverGap = new JButton();
+				getContentPane().add(coursesToCoverGap);
+				coursesToCoverGap.setText("Course Track Options");
+				coursesToCoverGap.setBounds(14, 145, 175, 28);
+				coursesToCoverGap.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
-						trainingTrackForJobButActionPerformed(evt);
+						coursesToCoverGapButActionPerformed(evt);
+					}
+				});
+			}
+			
+			{
+				cheepestCourseListToCoverGap = new JButton();
+				getContentPane().add(cheepestCourseListToCoverGap);
+				cheepestCourseListToCoverGap.setText("Cheepest Track");
+				cheepestCourseListToCoverGap.setBounds(414, 145, 175, 28);
+				cheepestCourseListToCoverGap.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						cheepestButActionPerformed(evt);
 					}
 				});
 			}
@@ -145,16 +158,28 @@ public class JobApplyView extends javax.swing.JFrame {
 			msgArea.append("\n" + sqle.toString());
 		}
 	}
-	private void trainingTrackForJobButActionPerformed(ActionEvent evt) {
-//		try {
-//			ResultSet rs = q.getTable(chosenTable);
-//			Vector res = q.resultSet2Vector(rs);
-//			TableModel tableModel = new DefaultTableModel(res, q.getTitlesAsVector(rs));
-//			table.setModel(tableModel);
-//			msgArea.append("\nNumber of records in " + chosenTable + " is " + res.size());
-//		} catch (SQLException sqle) {
-//			msgArea.append("\n" + sqle.toString());
-//		}
+	private void coursesToCoverGapButActionPerformed(ActionEvent evt) {
+		try {
+			ResultSet rs = ja.getCourseTrack(jobField.getText(), nameField.getText());
+			Vector res = ja.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, ja.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in result is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
+	}
+	
+	private void cheepestButActionPerformed(ActionEvent evt) {
+		try {
+			ResultSet rs = ja.getCheepestTrack(jobField.getText(), nameField.getText());
+			Vector res = ja.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, ja.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in result is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
 	}
 	private void bestFitJobsButActionPerformed(ActionEvent evt) {
 		try {

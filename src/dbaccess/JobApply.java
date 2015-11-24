@@ -91,7 +91,42 @@ public class JobApply {
 		ResultSet rs = stmt.executeQuery(str);
 		return rs;
 	}
-
+	public ResultSet getCourseTrack(String job, String name) throws SQLException {
+		String str = "SELECT course_id1, course_id2, course_id3 FROM "
+				+ "(WITH missing_skill AS ( "
+				+ "(SELECT skill_id FROM skill_require WHERE pos_code = '" + job +"') "
+				+ "MINUS"
+				+ "(SELECT skill_id FROM knows_skill NATURAL JOIN person WHERE name = '"+ name +"' ) ), "
+				+ "CourseSet_Skill(csetID, skill_id) AS ( "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id1=CS.course_id "
+				+ "UNION "
+				+ "SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id2=CS.course_id "
+				+ "UNION SELECT csetID, skill_id "
+				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id3=CS.course_id ), "
+				+ "/* use division to find those course sets that cover missing skills */ "
+				+ "Cover_CSet(csetID, siz) AS ( "
+				+ "SELECT csetID, siz FROM CourseSet CSet WHERE NOT EXISTS "
+				+ "( SELECT skill_id FROM Missing_Skill "
+				+ "MINUS "
+				+ "SELECT skill_id FROM CourseSet_Skill CSSk "
+				+ "WHERE CSSk.csetID = Cset.csetID ) ) "
+				+ "/* to find the  sets */ "
+				+ "SELECT course_id1, course_id2, course_id3 "
+				+ "FROM Cover_CSet NATURAL JOIN CourseSet) ";
+				Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		return rs;
+	}
+	
+	public ResultSet getCheepestTrack(String job, String name) throws SQLException {
+		String str = "SELECT * FROM CourseSet NATURAL JOIN (SELECT csetID, total FROM (WITH missing_skill AS ((SELECT skill_id FROM skill_require WHERE pos_code = '"+ job + "') MINUS (SELECT skill_id FROM knows_skill NATURAL JOIN person WHERE name = '"+name+"' ) ), CourseSet_Skill(csetID, skill_id) AS ( SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id1=CS.course_id UNION SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id2=CS.course_id UNION SELECT csetID, skill_id FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id3=CS.course_id ), /* use division to find those course sets that cover missing skills */ Cover_CSet(csetID, siz) AS ( SELECT csetID, siz FROM CourseSet CSet WHERE NOT EXISTS ( SELECT skill_id FROM Missing_Skill MINUS SELECT skill_id FROM CourseSet_Skill CSSk WHERE CSSk.csetID = Cset.csetID ) ), total_cost AS ( SELECT csetID, ( (SELECT coalesce(retail_price,0) FROM Course C1 WHERE coalesce(CS.course_id1,0) = coalesce(C1.course_id,0)) + (SELECT coalesce(retail_price,0)  FROM Course C2 WHERE coalesce(CS.course_id2,0) = coalesce(C2.course_id,0)) + (SELECT coalesce(retail_price,0)  FROM Course C3 WHERE coalesce(CS.course_id3,0) = coalesce(C3.course_id,0) ) )AS total FROM CourseSet CS NATURAL JOIN Cover_CSEt )  /* to find the cheapest sets */ SELECT * FROM total_cost ORDER BY total ASC FETCH FIRST 3 ROWS ONLY))";
+ 
+				Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		return rs;
+	}
 
 
 	/**
