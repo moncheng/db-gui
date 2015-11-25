@@ -21,3 +21,4 @@ drop table COURSE cascade constraints;
 drop table SECTION cascade constraints;                                         
 drop table PREREQUISITE cascade constraints;                                    
 drop table COURSESET cascade constraints; 
+

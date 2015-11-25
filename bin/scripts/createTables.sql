@@ -62,19 +62,19 @@ CREATE TABLE job
 	(job_id			number(10), 
 	 pos_code		number(10) NOT null,
 	 company_id     number(10),
-	 person_id		number(10) NOT null,
+	 person_id		number(10),
 	 job_type		varchar(20),
+	 salary			number(10,0),
+	 wage_rate		number(4,2),
 	 start_date		date,
 	 end_date		date,
-	 primary key (job_id)
+	 primary key (job_id, pos_code)
 	);
 
 CREATE TABLE job_profile
 	(pos_code		number(10), 
 	 job_title			varchar(30) NOT null,
 	 description	varchar(255),  
-	 salary			number(10,0),
-	 wage_rate		number(4,2),
 	 primary key (pos_code)
 	);
 
@@ -114,7 +114,6 @@ CREATE TABLE course_skill
 CREATE TABLE learn
 	(person_id		number(10),
 	 course_id		number(10),
-	 learn_from		varchar(20),
 	 primary key (person_id,course_id)
 	);
 
@@ -145,13 +144,6 @@ CREATE TABLE course
 	 primary key (course_id, required_course_id)
 	);
 
-
-/* a sequence to generate course set ID */
-CREATE SEQUENCE CourseSet_seq
-				START WITH 1
-				INCREMENT BY 1
-				MAXVALUE 999999
-				NOCYCLE;
         
         
 CREATE TABLE CourseSet (
@@ -161,16 +153,17 @@ CREATE TABLE CourseSet (
           course_id3 NUMBER(6, 0),
 					siz NUMBER(2, 0) /* number of courses */
 					);
-/* two-course set */
-INSERT INTO CourseSet
-				SELECT CourseSet_seq.NEXTVAL, C1.course_id, C2.course_id, null, 2
-				FROM Course C1, Course C2
-				WHERE C1.course_id < C2.course_id;
-/* three-course set */
-				INSERT INTO CourseSet
-				SELECT CourseSet_seq.NEXTVAL, C1.course_id, C2.course_id, C3.course_id, 3
-				FROM Course C1, Course C2, Course C3
-				WHERE C1.course_id < C2.course_id AND C2.course_id < C3.course_id; 
+          
+          
+
+/* a sequence to generate course set ID */
+CREATE SEQUENCE CourseSet_seq
+				START WITH 1
+				INCREMENT BY 1
+				MAXVALUE 999999
+				NOCYCLE;
+
+
 
 
 
