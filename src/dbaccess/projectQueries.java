@@ -187,14 +187,14 @@ public class ProjectQueries {
 		//18
 		queries.add("SELECT person_id FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY(person_id) HAVING  (SELECT COUNT(*) FROM skill_require Where pos_code=1)- COUNT(person_id)=1");
 		//19
-		queries.add("WITH missing_one AS  ( SELECT skill_id  FROM knows_skill NATURAL JOIN skill_require GROUP BY(skill_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1)  SELECT skill_id, COUNT(*) AS personsMissing_count FROM missing_one  GROUP BY (skill_id) ORDER BY personsMissing_count ASC");
+		queries.add("WITH missing_one AS( SELECT person_id FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY(person_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1)  select skill_id, count(*) as num_person from skill,missing_one M WHERE skill_id= (Select skill_id from(  (select skill_id from skill_require where pos_code=1) minus ( select K.skill_id  from knows_skill K where K.person_id = M.person_id)) ) GROUP BY (skill_id) order by num_person asc");
 		//20
 		queries.add("WITH number_needs(person_id,needs) AS (  (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require WHERE pos_code = 1 GROUP BY (person_id) ) ) SELECT person_id,needs FROM  number_needs WHERE needs= (SELECT MIN(needs)  FROM number_needs)");
 
 		//21
-		queries.add("WITH number_needs(person_id,needs) AS ( (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require WHERE pos_id = 1 GROUP BY (person_id) ) ) SELECT person_id,needs FROM number_needs WHERE needs <=2 UNION SELECT person_id, (SELECT count(*) FROM skill_require WHERE pos_code=1) FROM person P WHERE P.person_id not in (select person_id from number_needs) ORDER BY needs ASC");
+		queries.add("WITH number_needs(person_id,needs) AS ( (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require WHERE pos_code = 1 GROUP BY (person_id) ) ) SELECT person_id,needs FROM number_needs WHERE needs <=2 UNION SELECT person_id, (SELECT count(*) FROM skill_require WHERE pos_code=1) FROM person P WHERE P.person_id not in (select person_id from number_needs) ORDER BY needs ASC");
 		//22
-		queries.add("WITH missing_one AS  ( SELECT skill_id  FROM knows_skill NATURAL JOIN skill_require GROUP BY(skill_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1) SELECT skill_id, COUNT(*) AS personsMissing_count FROM missing_one  GROUP BY (skill_id) ORDER BY personsMissing_count DESC");
+		queries.add("WITH missing_one AS  ( SELECT person_id FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY(person_id) HAVING  (SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )- COUNT(person_id) =1)  select skill_id, count(*) as num_person from skill,missing_one M WHERE skill_id= (Select skill_id from(  (select skill_id from skill_require where pos_code=1) minus ( select K.skill_id  from knows_skill K where K.person_id = M.person_id)) ) GROUP BY (skill_id) order by num_person desc");
 		//23
 		queries.add("SELECT person_id,name FROM job_profile NATURAL JOIN job JOIN person USING(person_id) WHERE job_title= 'virus analyst'");
 		//24
