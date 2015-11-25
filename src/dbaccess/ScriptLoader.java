@@ -22,7 +22,7 @@ public class ScriptLoader {
 	{
 		createFile= new File("src/scripts/createTables.sql");
 		insertFile= new File("src/scripts/insertAllTables.sql");
-		dropFile= new File("src/scripts/dropAllTables.sql");
+		dropFile= new File("src/scripts/OneLineDropScript.sql");
 	}
 	
 	public String CreateTables()
@@ -39,9 +39,11 @@ public class ScriptLoader {
 		try {
 			Statement stmt = db.createStatement();
 			ResultSet rs = stmt.executeQuery(str);
+			System.out.println("excuted"+str);
 			str="";
 			while(rs.next())
 			str+=rs.getString(1);
+			System.out.println("final"+str);
 			return str;
 
 		} catch (SQLException sqle) {
@@ -54,9 +56,11 @@ public class ScriptLoader {
 	public String getScript(File file)
 	{
 		String text="";
+		System.out.println("before from file "+text);
+
 			try {
 				fileScanner=new Scanner(file);
-				while(fileScanner.hasNext())
+				while(fileScanner.hasNextLine())
 				{
 					text +=fileScanner.nextLine();
 				}
@@ -65,6 +69,7 @@ public class ScriptLoader {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			System.out.println("from file "+text);
 			return text;
 	}
 		

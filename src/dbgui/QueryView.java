@@ -182,13 +182,17 @@ public class QueryView extends javax.swing.JFrame {
 			TableModel tableModel = new DefaultTableModel(res, q.getTitlesAsVector(rs));
 			table.setModel(tableModel);
 			msgArea.append("\nNumber of records in is " + res.size());
-		} catch (SQLException sqle) {
-			msgArea.append("\n" + sqle.toString());
+			 try { rs.close(); } 
+	         catch (Exception ignore) {} 
 		}
+	 	catch (SQLException sqle) {
+	 		msgArea.append("\n" + sqle.toString());}
 	}
 	public ResultSet runSQLQuery(String str) throws SQLException {
 		Statement stmt = db.createStatement();
-		return stmt.executeQuery(str);
+		ResultSet set=stmt.executeQuery(str);
+		 try { stmt.close(); } catch (Exception ignore) { }
+		return set;
 	}	
 	/**
 	* activater
