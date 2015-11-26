@@ -73,7 +73,73 @@ public class RecruitEmployee {
 		ResultSet rs = stmt.executeQuery(str);
 		return rs;
 	}
+	public ResultSet getMissingOne(String jobID) throws SQLException{
+		String str = "WITH missing_one AS( "
+				+ "SELECT person_id FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 "
+				+ "GROUP BY(person_id) "
+				+ "HAVING  "
+				+ "(SELECT COUNT(*) FROM skill_require WHERE pos_code=1  )"
+				+ "- COUNT(person_id) =1)  "
+				+ "select skill_id, count(*) as num_person "
+				+ "from skill,missing_one M"
+				+ " WHERE skill_id= "
+				+ "(Select skill_id from(  "
+				+ "(select skill_id from skill_require where pos_code='"+jobID+"')"
+				+ " minus "
+				+ "( select K.skill_id  from knows_skill K where K.person_id = M.person_id)) ) "
+				+ "GROUP BY (skill_id) order by num_person asc";
+		
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		return rs;
+		
+	}
+	public ResultSet getMissingLeast(String jobID) throws SQLException{
+		String str = "WITH number_needs(person_id,needs) AS (  "
+				+ "(SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)"
+				+ "-count(person_id)) as needs FROM knows_skill natural join skill_require WHERE pos_code = '"+jobID+"' "
+				+ "GROUP BY (person_id) ) ) SELECT person_id,needs FROM  number_needs WHERE needs= "
+				+ "(SELECT MIN(needs)  FROM number_needs)";
+
 	
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		return rs;
+		
+	}
+	public ResultSet getMissingSome(String jobID, String k) throws SQLException{
+		String str = "WITH number_needs(person_id,needs) AS "
+				+ "(  (SELECT person_id,((SELECT COUNT(*) "
+				+ "FROM skill_require WHERE pos_code='"+jobID+"')-count(person_id)) as needs "
+				+ "FROM knows_skill NATURAL JOIN skill_require "
+				+ "WHERE pos_code=1 GROUP BY (person_id) ) ) "
+				+ "SELECT * FROM(SELECT person_id,needs "
+				+ "FROM number_needs N UNION SELECT person_id, (SELECT count(*) "
+				+ "FROM skill_require WHERE pos_code='"+jobID+"') FROM person P "
+				+ "WHERE P.person_id not in (SELECT person_id FROM number_needs) ) "
+				+ "WHERE needs<='"+k+"' ORDER BY needs ASC";
+	
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		return rs;
+		
+	}
+	public ResultSet getHowMany(String jobID) throws SQLException{
+		String str = "WITH number_needs(person_id,needs) AS (  "
+				+ "(SELECT person_id,((SELECT COUNT(*) "
+				+ "FROM skill_require WHERE pos_code=1)-count(person_id)) as needs "
+				+ "FROM knows_skill NATURAL JOIN skill_require WHERE pos_code='"+jobID+"' "
+				+ "GROUP BY (person_id) )) "
+				+ "SELECT skill_id, count(*) as num_person FROM skill, number_needs M "
+				+ "WHERE skill_id in (SELECT skill_id FROM (  ("
+				+ "SELECT skill_id FROM skill_require WHERE pos_code='"+jobID+"') "
+				+ "minus ( SELECT K.skill_id  FROM knows_skill K WHERE K.person_id = M.person_id)) ) "
+				+ "GROUP BY (skill_id) ORDER BY num_person DESC";
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		return rs;
+		
+	}
 	/**
 	 * return the columns' titles of a table as a Vector
 	 */

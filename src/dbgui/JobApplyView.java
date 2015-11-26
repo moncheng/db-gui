@@ -2,6 +2,8 @@ package dbgui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +34,8 @@ public class JobApplyView extends javax.swing.JFrame {
 	private JTextField jobField;
 	private JButton allJobs;
 	private JButton bestFitJobs;
+	private JButton highestPayingJobBut;
+
 	private JButton coursesToCoverGap;
 	private JButton cheepestCourseListToCoverGap;
 	private JTable table;
@@ -48,6 +52,7 @@ public class JobApplyView extends javax.swing.JFrame {
 		super();
 		this.ja = ja;
 		initGUI();
+		this.setTitle("Job Search and Training Planning");
 	}
 	
 	/**
@@ -58,7 +63,13 @@ public class JobApplyView extends javax.swing.JFrame {
 			{
 				nameField = new JTextField("Enter your name");
 				getContentPane().add(nameField);
-				nameField.setBounds(14, 5, 119, 28);
+				nameField.setBounds(14, 5, 175, 28);
+				nameField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	nameField.setText("");
+		            }
+		        });
 			}
 			{
 				allJobs = new JButton();
@@ -83,15 +94,32 @@ public class JobApplyView extends javax.swing.JFrame {
 				});
 			}
 			{
+				highestPayingJobBut = new JButton();
+				getContentPane().add(highestPayingJobBut);
+				highestPayingJobBut.setText("Highest Paying Job you qualify");
+				highestPayingJobBut.setBounds(14, 110, 175, 28);
+				highestPayingJobBut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						highestPayingJobButActionPerformed(evt);
+					}
+				});
+			}
+			{
 				jobField = new JTextField("Enter the job pos_code");
 				getContentPane().add(jobField);
-				jobField.setBounds(14, 110, 119, 28);
+				jobField.setBounds(255, 5, 175, 28);
+				jobField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	jobField.setText("");
+		            }
+		        });
 			}
 			{
 				coursesToCoverGap = new JButton();
 				getContentPane().add(coursesToCoverGap);
 				coursesToCoverGap.setText("Course Track Options");
-				coursesToCoverGap.setBounds(14, 145, 175, 28);
+				coursesToCoverGap.setBounds(255, 40, 175, 28);
 				coursesToCoverGap.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						coursesToCoverGapButActionPerformed(evt);
@@ -103,7 +131,7 @@ public class JobApplyView extends javax.swing.JFrame {
 				cheepestCourseListToCoverGap = new JButton();
 				getContentPane().add(cheepestCourseListToCoverGap);
 				cheepestCourseListToCoverGap.setText("Cheepest Track");
-				cheepestCourseListToCoverGap.setBounds(414, 145, 175, 28);
+				cheepestCourseListToCoverGap.setBounds(255, 75, 175, 28);
 				cheepestCourseListToCoverGap.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						cheepestButActionPerformed(evt);
@@ -116,17 +144,17 @@ public class JobApplyView extends javax.swing.JFrame {
 											new String[] {"Column 1", "Column 2" });
 				table = new JTable();
 				table.setModel(tableModel);
-				table.setBounds(21, 200, 826, 357);
+				table.setBounds(21, 255, 820, 350);
 			}
 			{
 				jScrollPane1 = new JScrollPane(table);
 				getContentPane().add(jScrollPane1);
-				jScrollPane1.setBounds(7, 200, 861, 329);
+				jScrollPane1.setBounds(7, 255, 861, 300);
 			}
 			{
 				msgPane = new JScrollPane();
 				getContentPane().add(msgPane);
-				msgPane.setBounds(245, 0, 623, 91);
+				msgPane.setBounds(21, 165, 820, 91);
 				{
 					msgArea = new JTextArea();
 					msgPane.setViewportView(msgArea);
@@ -185,6 +213,18 @@ public class JobApplyView extends javax.swing.JFrame {
 		try {
 			name = nameField.getText();
 			ResultSet rs = ja.getBestFitJobs(name);
+			Vector res = ja.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, ja.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in result is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
+	}
+	private void highestPayingJobButActionPerformed(ActionEvent evt) {
+		try {
+			name = nameField.getText();
+			ResultSet rs = ja.getHighestPayingJob(name);
 			Vector res = ja.resultSet2Vector(rs);
 			TableModel tableModel = new DefaultTableModel(res, ja.getTitlesAsVector(rs));
 			table.setModel(tableModel);

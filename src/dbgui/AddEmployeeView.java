@@ -2,6 +2,8 @@ package dbgui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -31,6 +33,8 @@ import java.util.Vector;
 public class AddEmployeeView extends javax.swing.JFrame {
 	private JTextField nameField;
 	private JTextField idField;
+	private JTextField id2Field;
+
 	private JTextField street_numberField;
 	private JTextField street_name_field;
 	private JTextField cityField;
@@ -70,46 +74,101 @@ public class AddEmployeeView extends javax.swing.JFrame {
 				nameField = new JTextField("Enter name of employee to add");
 				getContentPane().add(nameField);
 				nameField.setBounds(14, 5, 205, 28);
+				nameField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	nameField.setText("");
+		            }
+		        });
 			}
 			{
 				idField = new JTextField("id");
 				getContentPane().add(idField);
 				idField.setBounds(14, 35, 205, 28);
+				idField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	idField.setText("");
+		            }
+		        });
 			}
 			{
 				street_numberField = new JTextField("Street Number");
 				getContentPane().add(street_numberField);
 				street_numberField.setBounds(14, 65, 205, 28);
+				street_numberField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	street_numberField.setText("");
+		            }
+		        });
+				
 			}
 			{
 				street_name_field = new JTextField("Street Name");
 				getContentPane().add(street_name_field);
 				street_name_field.setBounds(14, 95, 205, 28);
+				street_name_field.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	street_name_field.setText("");
+		            }
+		        });
 			}
 			{
 				cityField = new JTextField("City");
 				getContentPane().add(cityField);
 				cityField.setBounds(14, 125, 205, 28);
+				cityField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	cityField.setText("");
+		            }
+		        });
 			}
 			{
 				stateField = new JTextField("State");
 				getContentPane().add(stateField);
 				stateField.setBounds(14, 155, 205, 28);
+				stateField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	stateField.setText("");
+		            }
+		        });
 			}
 			{
 				zip_codeField = new JTextField("Zip Code");
 				getContentPane().add(zip_codeField);
 				zip_codeField.setBounds(14, 185, 205, 28);
+				zip_codeField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	zip_codeField.setText("");
+		            }
+		        });
 			}
 			{
 				genderField = new JTextField("Gender");
 				getContentPane().add(genderField);
 				genderField.setBounds(14, 215, 205, 28);
+				genderField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	genderField.setText("");
+		            }
+		        });
 			}
 			{
 				emailField = new JTextField("Email");
 				getContentPane().add(emailField);
 				emailField.setBounds(14, 245, 205, 28);
+				emailField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	emailField.setText("");
+		            }
+		        });
 			}
 			
 			
@@ -125,15 +184,33 @@ public class AddEmployeeView extends javax.swing.JFrame {
 				});
 			}
 			{
-				skillField = new JTextField("Skill_id **adds to employee above**");
+				id2Field = new JTextField("id");
+				getContentPane().add(id2Field);
+				id2Field.setBounds(225, 125, 205, 28);
+				id2Field.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	id2Field.setText("");
+		            }
+		        });
+				
+			}
+			{
+				skillField = new JTextField("Enter Skill ID");
 				getContentPane().add(skillField);
-				skillField.setBounds(14, 305, 205, 28);
+				skillField.setBounds(225, 155, 205, 28);
+				skillField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	skillField.setText("");
+		            }
+		        });
 			}
 			{
 				addSkill = new JButton();
 				getContentPane().add(addSkill);
 				addSkill.setText("Add Skill");
-				addSkill.setBounds(14, 335, 175, 28);
+				addSkill.setBounds(225, 185, 175, 28);
 				addSkill.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						addSkillButActionPerformed(evt);
@@ -183,7 +260,7 @@ public class AddEmployeeView extends javax.swing.JFrame {
 
 		//create sql statement then request result set from db
 		try {
-			ae.addSkill(idField.getText(), skillField.getText());
+			ae.addSkill(id2Field.getText(), skillField.getText());
 		
 			msgArea.append("\nSkill added successfully");
 		} catch (SQLException sqle) {

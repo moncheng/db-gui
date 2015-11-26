@@ -36,6 +36,10 @@ public class LoginMenu extends javax.swing.JFrame {
 	private JLabel menuTitle;
 	private JLabel usernameLab;
 	private JLabel passwdLab;
+	private JLabel generalLab;
+	private JLabel searchLab;
+	private JLabel recruitLab;
+
 	private JButton mySQLBut;
 	private JButton queryBut;
 	private JButton tabModBut;
@@ -78,54 +82,63 @@ public class LoginMenu extends javax.swing.JFrame {
 	public LoginMenu() {
 		super();
 		initGUI();
+		this.setTitle("Recruit Employees");
+		loginButActionPerformed();
+		
 	}
 	
 	private void initGUI() {
 		try {
-			{
-				menuTitle = new JLabel();
-				getContentPane().add(menuTitle);
-				menuTitle.setText("Menu");
-				menuTitle.setBounds(91, 133, 63, 28);
-			}
+//			{
+//				menuTitle = new JLabel();
+//				getContentPane().add(menuTitle);
+//				menuTitle.setText("Menu");
+//				menuTitle.setBounds(91, 133, 63, 28);
+//			}
 			{
 				usernameLab = new JLabel();
 				getContentPane().add(usernameLab);
-				usernameLab.setText("User name");
-				usernameLab.setBounds(35, 14, 91, 28);
+//				usernameLab.setText("User name");
+//				usernameLab.setBounds(35, 14, 91, 28);
 			}
 			{
 				usernameField = new JTextField("id");
-				getContentPane().add(usernameField);
-				usernameField.setBounds(133, 14, 119, 28);
+//				getContentPane().add(usernameField);
+//				usernameField.setBounds(133, 14, 119, 28);
 			}
 			{
 				passwdLab = new JLabel();
-				getContentPane().add(passwdLab);
-				passwdLab.setText("passwordField");
-				passwdLab.setBounds(35, 49, 105, 28);
+//				getContentPane().add(passwdLab);
+//				passwdLab.setText("passwordField");
+//				passwdLab.setBounds(35, 49, 105, 28);
 			}
 			{
 				passwdField = new JTextField("pass");
-				getContentPane().add(passwdField);
-				passwdField.setBounds(133, 49, 119, 28);
+//				getContentPane().add(passwdField);
+//				passwdField.setBounds(133, 49, 119, 28);
 			}
 			{
-				loginBut = new JButton();
-				getContentPane().add(loginBut);
-				loginBut.setText("Login ");
-				loginBut.setBounds(14, 91, 175, 28);
-				loginBut.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						loginButActionPerformed(evt);
-					}
-				});
+//				loginBut = new JButton();
+//				getContentPane().add(loginBut);
+//				loginBut.setText("Login ");
+//				loginBut.setBounds(14, 91, 175, 28);
+//				loginBut.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent evt) {
+//						loginButActionPerformed(evt);
+//					}
+//				});
+			}
+			{
+				generalLab = new JLabel();
+				getContentPane().add(generalLab);
+				generalLab.setText("General");
+				generalLab.setBounds(80, 5, 175, 28);
 			}
 			{
 				tabViewBut = new JButton();
 				getContentPane().add(tabViewBut);
 				tabViewBut.setText("View Table ");
-				tabViewBut.setBounds(14, 161, 175, 28);
+				tabViewBut.setBounds(14, 40, 175, 28);
 				tabViewBut.setEnabled(false);
 				tabViewBut.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -137,7 +150,7 @@ public class LoginMenu extends javax.swing.JFrame {
 				queryBut = new JButton();
 				getContentPane().add(queryBut);
 				queryBut.setText("Scripts");
-				queryBut.setBounds(14, 196, 175, 28);
+				queryBut.setBounds(14, 75, 175, 28);
 				queryBut.setEnabled(false);
 				queryBut.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -147,46 +160,52 @@ public class LoginMenu extends javax.swing.JFrame {
 
 			}
 			{
-				tabSelectBut = new JButton();
-				getContentPane().add(tabSelectBut);
-				tabSelectBut.setText("Select rows from tables");
-				tabSelectBut.setBounds(14, 231, 175, 28);
-				tabSelectBut.setEnabled(false);
-				tabSelectBut.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						tabSelectButActionPerformed(evt);
-					}
-				});
+//				tabSelectBut = new JButton();
+//				getContentPane().add(tabSelectBut);
+//				tabSelectBut.setText("Select rows from tables");
+//				tabSelectBut.setBounds(14, 231, 175, 28);
+//				tabSelectBut.setEnabled(false);
+//				tabSelectBut.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent evt) {
+//						tabSelectButActionPerformed(evt);
+//					}
+//				});
 			}
 			{
-				tabModBut = new JButton();
-				getContentPane().add(tabModBut);
-				tabModBut.setText("Insert rows to tables");
-				tabModBut.setBounds(14, 266, 175, 28);
-				tabModBut.setEnabled(false);
-				tabModBut.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						tabModButActionPerformed(evt);
-					}
-				});
+//				tabModBut = new JButton();
+//				getContentPane().add(tabModBut);
+//				tabModBut.setText("Insert rows to tables");
+//				tabModBut.setBounds(14, 266, 175, 28);
+//				tabModBut.setEnabled(false);
+//				tabModBut.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent evt) {
+//						tabModButActionPerformed(evt);
+//					}
+//				});
 			}
 			{
-				mySQLBut = new JButton();
-				getContentPane().add(mySQLBut);
-				mySQLBut.setText("My SQL-PLUS");
-				mySQLBut.setBounds(14, 301, 175, 28);
-				mySQLBut.setEnabled(false);
-				mySQLBut.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent evt) {
-						mySQLButActionPerformed(evt);
-					}
-				});
+//				mySQLBut = new JButton();
+//				getContentPane().add(mySQLBut);
+//				mySQLBut.setText("My SQL-PLUS");
+//				mySQLBut.setBounds(14, 301, 175, 28);
+//				mySQLBut.setEnabled(false);
+//				mySQLBut.addActionListener(new ActionListener() {
+//					public void actionPerformed(ActionEvent evt) {
+//						mySQLButActionPerformed(evt);
+//					}
+//				});
+			}
+			{
+				searchLab = new JLabel();
+				getContentPane().add(searchLab);
+				searchLab.setText("Job Search");
+				searchLab.setBounds(250, 5, 175, 28);
 			}
 			{
 				jobSearchBut = new JButton();
 				getContentPane().add(jobSearchBut);
 				jobSearchBut.setText("Apply for a job");
-				jobSearchBut.setBounds(14, 336, 175, 28);
+				jobSearchBut.setBounds(210, 40, 147, 28);
 				jobSearchBut.setEnabled(false);
 				jobSearchBut.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -195,10 +214,16 @@ public class LoginMenu extends javax.swing.JFrame {
 				});
 			}
 			{
+				recruitLab = new JLabel();
+				getContentPane().add(recruitLab);
+				recruitLab.setText("Recruiters");
+				recruitLab.setBounds(440, 5, 175, 28);
+			}
+			{
 				recruitBut = new JButton();
 				getContentPane().add(recruitBut);
 				recruitBut.setText("Recruit applicants");
-				recruitBut.setBounds(14, 371, 175, 28);
+				recruitBut.setBounds(392, 40, 147, 28);
 				recruitBut.setEnabled(false);
 				recruitBut.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -210,7 +235,7 @@ public class LoginMenu extends javax.swing.JFrame {
 				addEmployeeBut = new JButton();
 				getContentPane().add(addEmployeeBut);
 				addEmployeeBut.setText("Add An Employee");
-				addEmployeeBut.setBounds(14, 406, 175, 28);
+				addEmployeeBut.setBounds(392, 75, 147, 28);
 				addEmployeeBut.setEnabled(false);
 				addEmployeeBut.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
@@ -219,38 +244,38 @@ public class LoginMenu extends javax.swing.JFrame {
 				});
 			}
 			{
-				hostLab = new JLabel();
-				getContentPane().add(hostLab);
-				hostLab.setText("database host");
-				hostLab.setBounds(287, 14, 105, 28);
+//				hostLab = new JLabel();
+//				getContentPane().add(hostLab);
+//				hostLab.setText("database host");
+//				hostLab.setBounds(287, 14, 105, 28);
 			}
 			{
 				hostField = new JTextField();
-				getContentPane().add(hostField);
+//				getContentPane().add(hostField);
 				hostField.setText("dbsvcs.cs.uno.edu");
 				hostField.setBounds(392, 14, 147, 28);
 			}
 			{
-				portLab = new JLabel();
-				getContentPane().add(portLab);
-				portLab.setText("databse port");
-				portLab.setBounds(294, 49, 98, 28);
+//				portLab = new JLabel();
+//				getContentPane().add(portLab);
+//				portLab.setText("databse port");
+//				portLab.setBounds(294, 49, 98, 28);
 			}
 			{
 				portField = new JTextField();
-				getContentPane().add(portField);
+//				getContentPane().add(portField);
 				portField.setText("1521");
 				portField.setBounds(392, 49, 70, 28);
 			}
-			{
-				sidLab = new JLabel();
-				getContentPane().add(sidLab);
-				sidLab.setText("database name (SID)");
-				sidLab.setBounds(245, 84, 147, 28);
-			}
+//			{
+//				sidLab = new JLabel();
+//				getContentPane().add(sidLab);
+//				sidLab.setText("database name (SID)");
+//				sidLab.setBounds(245, 84, 147, 28);
+//			}
 			{
 				sidField = new JTextField();
-				getContentPane().add(sidField);
+//				getContentPane().add(sidField);
 				sidField.setText("orcl");
 				sidField.setBounds(392, 84, 119, 28);
 			}
@@ -258,21 +283,30 @@ public class LoginMenu extends javax.swing.JFrame {
 				msgArea = new JTextArea();
 				getContentPane().add(msgArea);
 				msgArea.setText("database message");
-				msgArea.setBounds(203, 119, 462, 231);
+				msgArea.setBounds(14, 119, 633, 231);
 			}
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			pack();
 			this.setSize(680, 500);
+			this.setTitle("LinRobertson Express Business Solution");
 		} catch (Exception e) {
 			e.printStackTrace(); 
 		}
 	}
 	
-	private void loginButActionPerformed(ActionEvent evt) {
+	private void loginButActionPerformed() {
+
+//	private void loginButActionPerformed(ActionEvent evt) {
 		// System.out.println("loginBut.actionPerformed, event=" + evt);
-		String username = usernameField.getText();
-		String passwd = passwdField.getText();
+//		String username = usernameField.getText();
+//		String passwd = passwdField.getText();
+//		String host = hostField.getText();
+//		String port = portField.getText();
+//		String sid = sidField.getText();
+		
+		String username = "srobert6";
+		String passwd = "XMhL7Kpc";
 		String host = hostField.getText();
 		String port = portField.getText();
 		String sid = sidField.getText();
@@ -287,9 +321,9 @@ public class LoginMenu extends javax.swing.JFrame {
 			re= new RecruitEmployee(conn);
 			tabViewBut.setEnabled(true);
 			queryBut.setEnabled(true);
-			tabSelectBut.setEnabled(true);
-			tabModBut.setEnabled(true);
-			mySQLBut.setEnabled(true);
+//			tabSelectBut.setEnabled(true);
+//			tabModBut.setEnabled(true);
+//			mySQLBut.setEnabled(true);
 			jobSearchBut.setEnabled(true);
 			recruitBut.setEnabled(true);
 			addEmployeeBut.setEnabled(true);

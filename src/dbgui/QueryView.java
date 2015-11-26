@@ -63,6 +63,7 @@ public class QueryView extends javax.swing.JFrame {
 		super();
 		this.q = q;
 		initGUI();
+		this.setTitle("General Queries");
 	}
 	
 	/**
@@ -73,13 +74,13 @@ public class QueryView extends javax.swing.JFrame {
 			{
 				tnLabel = new JLabel();
 				getContentPane().add(tnLabel);
-				tnLabel.setText("Chose a Query or Script: ");
+				tnLabel.setText("Choose a Query or Script: ");
 				tnLabel.setBounds(7, 0, 160, 28);
 			}
 			{
 				queryPane = new JScrollPane();
 				getContentPane().add(queryPane);
-				queryPane.setBounds(7, 92, 861, 40);
+				queryPane.setBounds(7, 92, 825, 40);
 				{
 					queryArea = new JTextArea();
 					queryPane.setViewportView(queryArea);
@@ -91,7 +92,7 @@ public class QueryView extends javax.swing.JFrame {
 				tnJCombo = new JComboBox();
 				getContentPane().add(tnJCombo);
 				tnJCombo.setModel(tnJComboModel);
-				tnJCombo.setBounds(7, 28, 231, 28);
+				tnJCombo.setBounds(7, 28, 825, 28);
 				tnJCombo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						tnJComboActionPerformed(evt);
@@ -104,18 +105,18 @@ public class QueryView extends javax.swing.JFrame {
 											new String[] {"Column 1", "Column 2" });
 				table = new JTable();
 				table.setModel(tableModel);
-				table.setBounds(21, 98, 826, 357);
+				table.setBounds(21, 200, 825, 357);
 			}
 			{
 				jScrollPane1 = new JScrollPane(table);
 				getContentPane().add(jScrollPane1);
-				jScrollPane1.setBounds(7, 135, 861, 329);
+				jScrollPane1.setBounds(7, 237, 825, 329);
 			}
 
 			{
 				msgPane = new JScrollPane();
 				getContentPane().add(msgPane);
-				msgPane.setBounds(245, 0, 623, 91);
+				msgPane.setBounds(7, 145, 825, 91);
 				{
 					msgArea = new JTextArea();
 					msgPane.setViewportView(msgArea);

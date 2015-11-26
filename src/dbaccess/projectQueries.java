@@ -181,8 +181,8 @@ public class ProjectQueries {
 				+ "( SELECT R.skill_id  FROM skill_require R  WHERE R.pos_code=J.pos_code )"
 				+ " MINUS "
 				+ "( SELECT skill_id  FROM  knows_skill WHERE person_id=5 ) )");//16
-		queries.add("SELECT j.pos_code, MAX(salary+(wage_rate*1920)) AS max_income FROM job_profile j WHERE NOT EXISTS ( ( SELECT R.skill_id  FROM skill_require R  WHERE J.pos_code=R.pos_code) MINUS ( SELECT skill_id  FROM  knows_skill WHERE person_id=4 ) ) GROUP BY (pos_code)");
-		//17
+		queries.add("SELECT job_id, salary FROM job NATURAL JOIN (SELECT j.job_id FROM job j WHERE NOT EXISTS ( ( SELECT R.skill_id  FROM skill_require R  WHERE J.pos_code=R.pos_code) MINUS ( SELECT skill_id FROM  person NATURAL JOIN knows_skill WHERE name = 'William Ray' ) ) ) ORDER BY (SALARY) DESC FETCH FIRST 1 ROWS ONLY");
+//17
 		queries.add("SELECT name,email FROM person P  WHERE NOT EXISTS( ( SELECT skill_id FROM skill_require WHERE pos_code=1 ) MINUS ( SELECT skill_id FROM knows_skill K WHERE P.person_id = K.person_id) )");
 		//18
 		queries.add("SELECT person_id FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY(person_id) HAVING  (SELECT COUNT(*) FROM skill_require Where pos_code=1)- COUNT(person_id)=1");

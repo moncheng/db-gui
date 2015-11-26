@@ -75,7 +75,7 @@ public class JobApply {
 	 * returns all the jobs in the db
 	 */
 	public ResultSet getAllJobs() throws SQLException {
-		String str = "SELECT * FROM job_profile";
+		String str = "SELECT * FROM job_profile NATURAL JOIN job";
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);
 		return rs;
@@ -86,7 +86,13 @@ public class JobApply {
 				"WHERE NOT EXISTS ( (\n" +
 				"            SELECT R.skill_id \t  FROM skill_require R   WHERE R.pos_code=J.pos_code  )           "
 				+ "MINUS         (\n" +
-				" SELECT skill_id   FROM  knows_skill NATURAL JOIN person  WHERE name = '"+ name    +"')     )";
+				" SELECT skill_id   FROM   person NATURAL JOIN knows_skill  WHERE name = '"+ name    +"')     )";
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery(str);
+		return rs;
+	}
+	public ResultSet getHighestPayingJob(String name) throws SQLException {
+		String str = "SELECT job_id, job_title, salary FROM job NATURAL JOIN job_profile NATURAL JOIN (SELECT j.job_id FROM job j WHERE NOT EXISTS ( ( SELECT R.skill_id  FROM skill_require R  WHERE J.pos_code=R.pos_code) MINUS ( SELECT skill_id FROM  person NATURAL JOIN knows_skill WHERE name = '"+name+"' ) ) ) ORDER BY (SALARY) DESC FETCH FIRST 1 ROWS ONLY";
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery(str);
 		return rs;
@@ -96,7 +102,7 @@ public class JobApply {
 				+ "(WITH missing_skill AS ( "
 				+ "(SELECT skill_id FROM skill_require WHERE pos_code = '" + job +"') "
 				+ "MINUS"
-				+ "(SELECT skill_id FROM knows_skill NATURAL JOIN person WHERE name = '"+ name +"' ) ), "
+				+ "(SELECT skill_id FROM  person NATURAL JOIN knows_skill WHERE name = '"+ name +"' ) ), "
 				+ "CourseSet_Skill(csetID, skill_id) AS ( "
 				+ "SELECT csetID, skill_id "
 				+ "FROM CourseSet CSet JOIN course_skill CS ON CSet.course_id1=CS.course_id "

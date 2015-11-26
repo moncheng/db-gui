@@ -2,6 +2,8 @@ package dbgui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -29,14 +31,23 @@ import java.util.Vector;
 */
 public class RecruitEmployeeView extends javax.swing.JFrame {
 	private JTextField nameField;
+	private JTextField jobIDField;
+	private JTextField kField;
+
+
 	private JButton allPersons;
 	private JButton bestFitJobs;
+	private JButton missingOneBut;
+	private JButton missingSomeBut;
+	private JButton missingLeastBut;
+
+	private JButton howManyBut;
+
 	private JTable table;
 	private JTextArea msgArea;
 	private JScrollPane msgPane;
 	private JScrollPane jScrollPane1;
 	private RecruitEmployee re;
-	String name;
 
 	/**
 	* constructor takes a reference of a db accesser object 
@@ -67,16 +78,88 @@ public class RecruitEmployeeView extends javax.swing.JFrame {
 			{
 				nameField = new JTextField("Name the person of interest");
 				getContentPane().add(nameField);
-				nameField.setBounds(14, 40, 200, 28);
+				nameField.setBounds(205, 5, 175, 28);
+				nameField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	nameField.setText("");
+		            }
+		        });
 			}
 			{
 				bestFitJobs = new JButton();
 				getContentPane().add(bestFitJobs);
 				bestFitJobs.setText("Likely Jobs");
-				bestFitJobs.setBounds(14, 75, 175, 28);
+				bestFitJobs.setBounds(205, 40, 175, 28);
 				bestFitJobs.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						bestFitJobsButActionPerformed(evt);
+					}
+				});
+			}
+			{
+				jobIDField = new JTextField("Enter the jobID for the following searches");
+				getContentPane().add(jobIDField);
+				jobIDField.setBounds(405, 5, 240, 28);
+				jobIDField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		            	jobIDField.setText("");
+		            }
+		        });
+			}
+			{
+				missingOneBut = new JButton();
+				getContentPane().add(missingOneBut);
+				missingOneBut.setText("List Those Missing One Skill");
+				missingOneBut.setBounds(405, 40, 240, 28);
+				missingOneBut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						missingOneButActionPerformed(evt);
+					}
+				});
+			}
+			{
+				kField = new JTextField("Enter max number of missing skills");
+				getContentPane().add(kField);
+				kField.setBounds(650, 75, 220, 28);
+				kField.addMouseListener(new MouseAdapter(){
+		            @Override
+		            public void mouseClicked(MouseEvent e){
+		                kField.setText("");
+		            }
+		        });
+			}
+			{
+				missingSomeBut = new JButton();
+				getContentPane().add(missingSomeBut);
+				missingSomeBut.setText("List Those Missing Some Skills");
+				missingSomeBut.setBounds(405, 75, 240, 28);
+				missingSomeBut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						missingSomeButActionPerformed(evt);
+					}
+				});
+			}
+			{
+				howManyBut = new JButton();
+				getContentPane().add(howManyBut);
+				howManyBut.setText("How many are missing which skills");
+				howManyBut.setBounds(405, 110, 240, 28);
+				howManyBut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						howManyButActionPerformed(evt);
+					}
+				});
+			}
+			{
+				missingLeastBut = new JButton();
+				getContentPane().add(missingLeastBut);
+				missingLeastBut.setText("List Those Missing The Least Skills");
+				missingLeastBut.setBounds(405, 135, 240, 28);
+				missingLeastBut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						missingLeastButActionPerformed(evt);
 					}
 				});
 			}
@@ -88,17 +171,17 @@ public class RecruitEmployeeView extends javax.swing.JFrame {
 											new String[] {"Column 1", "Column 2" });
 				table = new JTable();
 				table.setModel(tableModel);
-				table.setBounds(21, 200, 826, 357);
+				table.setBounds(21, 255, 820, 357);
 			}
 			{
 				jScrollPane1 = new JScrollPane(table);
 				getContentPane().add(jScrollPane1);
-				jScrollPane1.setBounds(7, 200, 861, 329);
+				jScrollPane1.setBounds(7, 255, 861, 300);
 			}
 			{
 				msgPane = new JScrollPane();
 				getContentPane().add(msgPane);
-				msgPane.setBounds(245, 0, 623, 91);
+				msgPane.setBounds(21, 165, 820, 91);
 				{
 					msgArea = new JTextArea();
 					msgPane.setViewportView(msgArea);
@@ -108,7 +191,7 @@ public class RecruitEmployeeView extends javax.swing.JFrame {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			pack();
-			this.setSize(883, 485);
+			this.setSize(this.getMaximumSize());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,8 +216,7 @@ public class RecruitEmployeeView extends javax.swing.JFrame {
 
 	private void bestFitJobsButActionPerformed(ActionEvent evt) {
 		try {
-			name = nameField.getText();
-			ResultSet rs = re.getBestFitJobs(name);
+			ResultSet rs = re.getBestFitJobs(nameField.getText());
 			Vector res = re.resultSet2Vector(rs);
 			TableModel tableModel = new DefaultTableModel(res, re.getTitlesAsVector(rs));
 			table.setModel(tableModel);
@@ -144,7 +226,58 @@ public class RecruitEmployeeView extends javax.swing.JFrame {
 		}
 	}
 	
-	
+	private void missingOneButActionPerformed(ActionEvent evt) {
+
+		//create sql statement then request result set from db
+		try {
+			ResultSet rs = re.getMissingOne(jobIDField.getText());
+			Vector res = re.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, re.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in result is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
+	}
+	private void missingSomeButActionPerformed(ActionEvent evt) {
+
+		//create sql statement then request result set from db
+		try {
+			ResultSet rs = re.getMissingSome(jobIDField.getText(), kField.getText());
+			Vector res = re.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, re.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in result is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
+	}
+	private void missingLeastButActionPerformed(ActionEvent evt) {
+
+		//create sql statement then request result set from db
+		try {
+			ResultSet rs = re.getMissingLeast(jobIDField.getText());
+			Vector res = re.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, re.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in result is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
+	}
+	private void howManyButActionPerformed(ActionEvent evt) {
+
+		//create sql statement then request result set from db
+		try {
+			ResultSet rs = re.getHowMany(jobIDField.getText());
+			Vector res = re.resultSet2Vector(rs);
+			TableModel tableModel = new DefaultTableModel(res, re.getTitlesAsVector(rs));
+			table.setModel(tableModel);
+			msgArea.append("\nNumber of records in result is " + res.size());
+		} catch (SQLException sqle) {
+			msgArea.append("\n" + sqle.toString());
+		}
+	}
 	
 	
 	/**
