@@ -10,7 +10,7 @@ INSERT INTO company VALUES (9, 'Voonder', '4', 'Melby', 'Louisville', 'Kentucky'
 INSERT INTO company VALUES (10, 'Edgeclub', '61', 'American', 'Chicago', 'Illinois', '60686', 'google.it');
 	
 INSERT INTO project VALUES(1,2,'HolyGate');	
-INSERT INTO project VALUES(2,2,'Photospace Training');	
+INSERT INTO project VALUES(2,2,'ReserchLegionairre');	
 
 INSERT INTO person VALUES (1, 'Julia Hicks', '96', 'Comanche', 'London', 'Kentucky', '40745', 'Male', 'jhicks0@scientificamerican.com');
 INSERT INTO person VALUES (2, 'Mark Lee', '97', 'Kipling', 'Cincinnati', 'Ohio', '45999', 'Female', 'mlee1@qq.com');
@@ -91,6 +91,19 @@ INSERT INTO knows_skill VALUES(5,5);	/*william ray knows teaching*/
 INSERT INTO knows_skill VALUES(5,7);	/*william ray knows marketing*/
 INSERT INTO knows_skill VALUES(5,8);	/*william ray knows information technology*/
 
+INSERT INTO knows_skill VALUES(10,4); /* knows research*/
+INSERT INTO knows_skill VALUES(10,1);	/*leadership*/
+INSERT INTO knows_skill VALUES(10,2);	/*java*/
+INSERT INTO knows_skill VALUES(10,3);	/*computation*/
+INSERT INTO knows_skill VALUES(10,5);	/*teaching*/
+INSERT INTO knows_skill VALUES(10,7);	/* marketing*/
+INSERT INTO knows_skill VALUES(10,8);	/* information technology*/
+INSERT INTO knows_skill VALUES(11,4);	/* knows research*/
+INSERT INTO knows_skill VALUES(11,6);	/* knows environment*/
+INSERT INTO knows_skill VALUES(12,4); /* knows research*/
+INSERT INTO knows_skill VALUES(13,4);	/* knows research*/
+INSERT INTO knows_skill VALUES(14,4);	/* knows research*/
+
 /*which jobs require which skills*/
 INSERT INTO skill_require VALUES(1,2);	/*research assistant requires java*/
 INSERT INTO skill_require VALUES(1,4);	/*research assistant requires research*/
@@ -144,15 +157,15 @@ INSERT INTO skill_require VALUES(16,19);
 INSERT INTO skill_require VALUES(16,20);
 
 
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (1, 'Research Assistant I', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (2, 'General Manager', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (3, 'Business Development Analyst', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (4, 'Systems Administrator III', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (5, 'Marketing Manager', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (6, 'Web Developer II', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (7, 'Environmental Specialist', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (8, 'Help Desk Technician', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description,salary,wage_rate) VALUES (9, 'Information Systems Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (1, 'Research Assistant I', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (2, 'General Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (3, 'Business Development Analyst', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (4, 'Systems Administrator III', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (5, 'Marketing Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (6, 'Web Developer II', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (7, 'Environmental Specialist', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (8, 'Help Desk Technician', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (9, 'Information Systems Manager', 'ajob');
 INSERT INTO job_profile VALUES (10, 'Tutor', 'ajob');
 INSERT INTO job_profile VALUES (11, 'Teaching Assistant', 'ajob');
 INSERT INTO job_profile VALUES (12, 'substitute teacher', 'ajob');
@@ -161,7 +174,7 @@ INSERT INTO job_profile VALUES (14, 'High School Teacher', 'ajob');
 INSERT INTO job_profile VALUES (15, 'Professor', 'ajob');
 INSERT INTO job_profile VALUES (16, 'Instructor', 'ajob');
 
--- job_profile (pos_code, job_title, description,salary,wage_rate)
+-- job_profile (pos_code, job_title, description,)
 --job titles
 -- Accounting Clerk
 -- Accounting Clerk Leader
@@ -209,16 +222,27 @@ INSERT INTO job_profile VALUES (16, 'Instructor', 'ajob');
 -- Security Specialist
 
 /*who holds what job*/
-INSERT INTO job VALUES(11,10,2,1,'full-time','03-APR-2014',null);	/*julia hicks is a teacher for photospace*/
-INSERT INTO job VALUES(1,6,2,1,'full-time','03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
-INSERT INTO job VALUES(2,2,2,5,'full-time','03-APR-2014',null);	/*william ray is general manager for photospace*/
-INSERT INTO job VALUES(3,1,2,2,'full-time','03-APR-2014',null);	/*mark lee is a research assistant for photospace*/
-INSERT INTO job VALUES(4,5,2,4,'full-time','03-APR-2014',null);	/*jaqueline nichols is a marketing manager for photospace*/
+INSERT INTO job VALUES(11,10,2,1,'full-time',30000,0, '03-APR-2014',null);	/*julia hicks is a teacher for photospace*/
+INSERT INTO job VALUES(1,6,2,1,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
+INSERT INTO job VALUES(2,2,2,5,'full-time',35000, 0,'03-APR-2014',null);	/*william ray is general manager for photospace*/
+INSERT INTO job VALUES(3,1,2,2,'full-time',20000,0, '03-APR-2014',null);	/*mark lee is a research assistant for photospace*/
+INSERT INTO job VALUES(4,5,2,4,'full-time',45000, 0,'03-APR-2014',null);	/*jaqueline nichols is a marketing manager for photospace*/
 
-INSERT INTO work_on VALUES(1,1);	/*HolyGate's developer II for photospace*/
-INSERT INTO work_on VALUES(2,1);	/*HolyGate's general manager for photospace*/
-INSERT INTO work_on VALUES(3,1);	/*HolyGate's research assistant for photospace*/
-INSERT INTO work_on VALUES(4,1);	 /*HolyGate's marketing manager for photospace*/
+INSERT INTO job VALUES(5,7,3,11,'full-time',65000,0, '03-APR-2001',null);	/* is a Environamental Specialist for Realfire*/
+INSERT INTO job VALUES(6,1,3,12,'full-time',35000,0, '03-APR-2001',null);	/* is a research assistant  for Realfire*/
+INSERT INTO job VALUES(7,2,3,10,'full-time',500000,0, '03-APR-2001',null);	/* is general manager for Realfire*/
+INSERT INTO job VALUES(8,1,3,13,'full-time',35000,0,'03-APR-2001',null);	/*is a research assistant for Realfire*/
+INSERT INTO job VALUES(9,1,3,14,'full-time',40000,0,'03-APR-2001',null);	/* is a research assistant  for Realfire*/
+
+INSERT INTO work_on VALUES(1,1);	/*ProjectHolyGate's developer II for photospace*/
+INSERT INTO work_on VALUES(2,1);	/*ProjectHolyGate's general manager for photospace*/
+INSERT INTO work_on VALUES(3,1);	/*ProjectHolyGate's research assistant for photospace*/
+INSERT INTO work_on VALUES(4,1);	 /*ProjectHolyGate's marketing manager for photospace*/
+
+INSERT INTO work_on VALUES(5,2);	/*Project Research's developer II for Realfire*/
+INSERT INTO work_on VALUES(6,2);	/*ProjectResearch's general manager for Realfire*/
+INSERT INTO work_on VALUES(7,2);	/*ProjectResearch's research assistant for Realfire*/
+INSERT INTO work_on VALUES(8,2);	 /*ProjectResearch's marketing manager for Realfire*/
 
 INSERT INTO work_on VALUES(11,2);	/*teacher works on Photospace Training*/
 
@@ -326,3 +350,13 @@ INSERT INTO phone_number VALUES(13,1,646,3345551);
 INSERT INTO phone_number VALUES(14,1,917,2223333);
 INSERT INTO phone_number VALUES(15,1,985,1115522);
 
+/* two-course set */
+INSERT INTO CourseSet
+				SELECT CourseSet_seq.NEXTVAL, C1.course_id, C2.course_id, null, 2
+				FROM Course C1, Course C2
+				WHERE C1.course_id < C2.course_id;
+/* three-course set */
+				INSERT INTO CourseSet
+				SELECT CourseSet_seq.NEXTVAL, C1.course_id, C2.course_id, C3.course_id, 3
+				FROM Course C1, Course C2, Course C3
+				WHERE C1.course_id < C2.course_id AND C2.course_id < C3.course_id; 
