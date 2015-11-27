@@ -38,15 +38,14 @@ insert into person values (23, 'Jean Harvey', '42', 'Buhler', 'New York City', '
 insert into person values (24, 'Gerald Meyer', '957', 'Dunning', 'Van Nuys', 'California', '91499', 'Male', 'gmeyern@surveymonkey.com');
 insert into person values (25, 'Albert Garza', '95', 'Emmet', 'San Francisco', 'California', '94177', 'Female', 'agarzao@discovery.com');
 
-INSERT INTO skill VALUES (0,'Java for beginner','high level programming language','entry');	
-INSERT INTO skill VALUES (1, 'leadership', null, 3);
-INSERT INTO skill VALUES (2, 'java', null, 3);
-INSERT INTO skill VALUES (3, 'computaion', null, 1);
-INSERT INTO skill VALUES (4, 'research', null, 3);
-INSERT INTO skill VALUES (5, 'teaching', null, 2);
-INSERT INTO skill VALUES (6, 'environment', null, 2);
-INSERT INTO skill VALUES (7, 'marketing', null, 2);
-INSERT INTO skill VALUES (8, 'Information Technology', null, 2);
+INSERT INTO skill VALUES (1, 'leadership', 'Ability to delegate members of a team towards a common goal', 3);
+INSERT INTO skill VALUES (2, 'java', 'Knowledge of the java programming language', 3);
+INSERT INTO skill VALUES (3, 'computation', 'In depth knowledge of calculus theory', 3);
+INSERT INTO skill VALUES (4, 'research', 'Knowledge of the scientific method and experimental design', 3);
+INSERT INTO skill VALUES (5, 'teaching', 'Ability to educate a discipline others', 2);
+INSERT INTO skill VALUES (6, 'environment', 'Geography, climate, and pollution', 2);
+INSERT INTO skill VALUES (7, 'marketing', 'Advertising and Networking', 2);
+INSERT INTO skill VALUES (8, 'Information Technology', 'Hardware, Networking, and troubleshooting', 2);
 INSERT INTO skill VALUES (9, 'tutoring', null, 1);
 INSERT INTO skill VALUES (10, 'elementry teaching', null, 1);
 INSERT INTO skill VALUES (11, 'high school teaching', null, 2);
@@ -75,7 +74,8 @@ INSERT INTO knows_skill VALUES(1,8);	/*julia hicks knows information technology*
 
 INSERT INTO knows_skill VALUES(2,1);/*mark lee knows leadership*/
 INSERT INTO knows_skill VALUES(2,4);/*mark lee knows research*/
-	
+	INSERT INTO knows_skill VALUES(2,8);/*mark lee knows IT*/
+
 INSERT INTO knows_skill VALUES(3,2);	/*keith martinez knows java*/
 INSERT INTO knows_skill VALUES(3,4);	/*keith martinez knows research*/
 
@@ -100,6 +100,14 @@ INSERT INTO knows_skill VALUES(10,7);	/* marketing*/
 INSERT INTO knows_skill VALUES(10,8);	/* information technology*/
 INSERT INTO knows_skill VALUES(11,4);	/* knows research*/
 INSERT INTO knows_skill VALUES(11,6);	/* knows environment*/
+INSERT INTO knows_skill VALUES(11,14);	/* knows comm*/
+INSERT INTO knows_skill VALUES(12,14);	/* knows comm*/
+
+INSERT INTO knows_skill VALUES(13,14);	/* knows comm*/
+
+INSERT INTO knows_skill VALUES(14,14);	/* knows comm*/
+
+
 INSERT INTO knows_skill VALUES(12,4); /* knows research*/
 INSERT INTO knows_skill VALUES(13,4);	/* knows research*/
 INSERT INTO knows_skill VALUES(14,4);	/* knows research*/
@@ -116,6 +124,8 @@ INSERT INTO skill_require VALUES(2,1);	/*general Manager requires Leadership*/
 INSERT INTO skill_require VALUES(2,5);	/*general Manager requires Teaching*/
 INSERT INTO skill_require VALUES(2,3);	/*general Manager requires computation*/
 
+INSERT INTO skill_require VALUES(3,3);	/*business analyst*/
+
 INSERT INTO skill_require VALUES(5,7);	/*marketing Manager requires marketing*/
 INSERT INTO skill_require VALUES(5,1);	/*marketing Manager requires leadership*/
 
@@ -126,7 +136,6 @@ INSERT INTO skill_require VALUES(6,8);	/*Web Developer II requires information t
 INSERT INTO skill_require VALUES(10,9);	/*Teacher requires teaching*/
 
 INSERT INTO skill_require VALUES(11,9);
-INSERT INTO skill_require VALUES(11,14);
 INSERT INTO skill_require VALUES(12,14);
 INSERT INTO skill_require VALUES(12,16);
 INSERT INTO skill_require VALUES(13,10);
@@ -174,53 +183,6 @@ INSERT INTO job_profile VALUES (14, 'High School Teacher', 'ajob');
 INSERT INTO job_profile VALUES (15, 'Professor', 'ajob');
 INSERT INTO job_profile VALUES (16, 'Instructor', 'ajob');
 
--- job_profile (pos_code, job_title, description,)
---job titles
--- Accounting Clerk
--- Accounting Clerk Leader
--- Accounting Director
--- Accounting Manager
--- Accounting Supervisor
--- Budget Manager
--- Bursar
--- Certified Public Accountant
--- Corporate Accountant
--- Cost Accountant
--- Director of Financial Operations
--- Industrial Accountant
--- Information Technology Audit Manager
--- Information Technology Auditor
--- Private Accountant
--- Public Accountant
--- Revenue Cycle Administrator
--- Revenue Cycle Manager
--- Senior Cash Management Analyst
--- Senior Financial Analyst
--- Senior General Audit Manager
--- Assistant Project Manager
--- Building Inspector
--- Carpenter
--- Civil Engineer
--- Concrete Laborers
--- Construction Assistant
--- Construction Coordinator
--- Construction Engineer
--- Construction Foreman
--- Construction Manager
--- Application Support Analyst
--- Applications Engineer
--- Associate Developer
--- Computer Systems Manager
--- Customer Support Administrator
--- Customer Support Specialist
--- Front End Developer
--- Help Desk Specialist
--- Help Desk Technician
--- Information Technology Coordinator
--- Programmer
--- Programmer Analyst
--- Security Specialist
-
 /*who holds what job*/
 INSERT INTO job VALUES(11,10,2,1,'full-time',30000,0, '03-APR-2014',null);	/*julia hicks is a teacher for photospace*/
 INSERT INTO job VALUES(1,6,2,1,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
@@ -233,6 +195,13 @@ INSERT INTO job VALUES(6,1,3,12,'full-time',35000,0, '03-APR-2001',null);	/* is 
 INSERT INTO job VALUES(7,2,3,10,'full-time',500000,0, '03-APR-2001',null);	/* is general manager for Realfire*/
 INSERT INTO job VALUES(8,1,3,13,'full-time',35000,0,'03-APR-2001',null);	/*is a research assistant for Realfire*/
 INSERT INTO job VALUES(9,1,3,14,'full-time',40000,0,'03-APR-2001',null);	/* is a research assistant  for Realfire*/
+INSERT INTO job VALUES(10,13,3,20,'full-time',65000,0, '03-APR-2001',null);	/* is a Environamental Specialist for Realfire*/
+INSERT INTO job VALUES(11,6,2,25,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
+INSERT INTO job VALUES(12,6,2,24,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
+INSERT INTO job VALUES(13,6,2,23,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
+INSERT INTO job VALUES(14,6,2, 22,'full-time',100000,0, '03-APR-2014','05-APR-2014');	/*julia hicks is a web developer II for photospace*/
+INSERT INTO job VALUES(15,2,2, 19,'full-time',100000,0, '03-APR-2014','05-APR-2014');	
+
 
 INSERT INTO work_on VALUES(1,1);	/*ProjectHolyGate's developer II for photospace*/
 INSERT INTO work_on VALUES(2,1);	/*ProjectHolyGate's general manager for photospace*/
@@ -275,6 +244,11 @@ INSERT INTO course VALUES(21,'methods of teaching','','open',600);
 /*which course provides which skill*/
 INSERT INTO course_skill VALUES(1,1);	/*leadership from Leadership*/
 INSERT INTO course_skill VALUES(2,2);	/*java from Java I*/
+INSERT INTO course_skill VALUES(8,2);	/*IT from Java I*/
+
+INSERT INTO course_skill VALUES(3,8);	/*business from marketing*/
+
+
 INSERT INTO course_skill VALUES(4,3);	/*research from Research Methods*/
 INSERT INTO course_skill VALUES(5,4);	/*teaching from Education*/
 INSERT INTO course_skill VALUES(3,7);	/*computation from calculus*/
@@ -298,6 +272,12 @@ INSERT INTO course_skill VALUES(21,21);	/*modern teaching from methods of teachi
 INSERT INTO section VALUES(1, 1, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2016', '03-JUN-2017','Mr. President'); /*leadership from Mr. President*/
 INSERT INTO section VALUES(2, 1, TO_DSINTERVAL('0 14:00:00'),TO_DSINTERVAL('0 15:00:00'),'03-JAN-2016', '03-MAY-2017','Mr. President'); /*leadership from Mr. President*/
 INSERT INTO section VALUES(3, 1, TO_DSINTERVAL('0 15:00:00'),TO_DSINTERVAL('0 16:00:00'),'03-JAN-2016', '03-OCT-2017','Mr. President'); /*leadership from Mr. President*/
+
+INSERT INTO section VALUES(4, 4, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2016', '03-JUN-2017','Dr. Tu'); /*research from Mr. President*/
+INSERT INTO section VALUES(5, 4, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2016', '03-JUN-2017','Dr. Tut'); /*research from Mr. President*/
+INSERT INTO section VALUES(6, 4, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2016', '03-JUN-2017','Dr. Tu'); /*research from Mr. President*/
+
+INSERT INTO section VALUES(7, 8, TO_DSINTERVAL('0 13:00:00'),TO_DSINTERVAL('0 14:00:00'),'03-JAN-2016', '03-JUN-2017','Dr. Tu'); /*research from Mr. President*/
 
 INSERT INTO speciality VALUES(1,'Finance');	
 INSERT INTO speciality VALUES(2,'Software Development');	
