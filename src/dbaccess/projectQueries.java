@@ -76,7 +76,7 @@ public class ProjectQueries {
 	}
 	public void addQueries()
 	{
-		queries.add("SELECT DISTINCT name FROM job NATURAL JOIN person WHERE company_id = 2");
+		queries.add("SELECT DISTINCT name FROM person NATURAL JOIN job WHERE company_id = 2");
 		//1a
 		queries.add("SELECT name, job_title, salary FROM person NATURAL JOIN job NATURAL JOIN job_profile "
 				+ "WHERE company_id=2 AND job_type='full-time' ORDER BY salary DESC");
@@ -92,7 +92,7 @@ public class ProjectQueries {
 				+ "WHERE person_id = 1");
 		//6a
 		queries.add("SELECT skill_id FROM "
-				+ "(SELECT skill_id FROM SKILL_REQUIRE NATURAL JOIN job_profile NATURAL JOIN job "
+				+ "(SELECT skill_id FROM job_profile NATURAL JOIN job NATURAL JOIN skill_require "
 				+ "WHERE job_id = (SELECT job_id FROM job WHERE person_id = 2) )"
 				+ "MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 2)");
 		//7a
@@ -112,7 +112,7 @@ public class ProjectQueries {
 				+ "MINUS "
 				+ "SELECT skill_id FROM course_skill cs "
 				+ "WHERE cs.course_id = c.course_id ))");
-		//moved 
+		
 		//10a
 		
 		queries.add("SELECT course_id, course_title FROM( "
@@ -219,7 +219,7 @@ public class ProjectQueries {
 		queries.add("WITH number_needs(person_id,needs) AS (  (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill natural join skill_require WHERE pos_code = 13 GROUP BY (person_id) ) ) SELECT person_id,needs FROM  number_needs WHERE needs= (SELECT MIN(needs)  FROM number_needs)");
 
 		//21a
-		queries.add("WITH number_needs(person_id,needs) AS (  (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY (person_id) ) ) SELECT * FROM(SELECT person_id,needs FROM number_needs N UNION SELECT person_id, (SELECT count(*) FROM skill_require WHERE pos_code=1) FROM person P WHERE P.person_id not in (SELECT person_id FROM number_needs) ) WHERE needs<=1 ORDER BY needs ASC");
+		queries.add("WITH number_needs(person_id,needs) AS (  (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY (person_id) ) ) SELECT * FROM(SELECT person_id,needs FROM number_needs N UNION SELECT person_id, (SELECT count(*) FROM skill_require WHERE pos_code=1) FROM person P WHERE P.person_id not in (SELECT person_id FROM number_needs) ) WHERE needs<=2 ORDER BY needs ASC");
 		//22a
 		queries.add("WITH number_needs(person_id,needs) AS (  (SELECT person_id,((SELECT COUNT(*) FROM skill_require WHERE pos_code=1)-count(person_id)) as needs FROM knows_skill NATURAL JOIN skill_require WHERE pos_code=1 GROUP BY (person_id) )) SELECT skill_id, count(*) as num_person FROM skill, number_needs M WHERE skill_id in (SELECT skill_id FROM (  (SELECT skill_id FROM skill_require WHERE pos_code=1) minus ( SELECT K.skill_id  FROM knows_skill K WHERE K.person_id = M.person_id)) ) GROUP BY (skill_id) ORDER BY num_person DESC");
 		//23a
@@ -230,7 +230,7 @@ public class ProjectQueries {
 		queries.add("WITH number_jobs(company_id,job_count) AS (SELECT company_id, COUNT(*) FROM job GROUP BY (company_id) ) SELECT company_id FROM number_jobs WHERE job_count = (SELECT MAX(job_count)  FROM number_jobs)");
 		//26a
 
-		queries.add("SELECT DISTINCT name FROM job NATURAL JOIN person WHERE company_id = 3");
+		queries.add("SELECT DISTINCT name FROM person NATURAL JOIN job WHERE company_id = 3");
 		//1b
 		queries.add("SELECT name, job_title, salary FROM person NATURAL JOIN job NATURAL JOIN job_profile "
 				+ "WHERE company_id=3 AND job_type='full-time' ORDER BY salary DESC");
@@ -246,7 +246,7 @@ public class ProjectQueries {
 				+ "WHERE person_id = 10");
 		//6b
 		queries.add("SELECT skill_id FROM "
-				+ "(SELECT skill_id FROM SKILL_REQUIRE NATURAL JOIN job_profile NATURAL JOIN job "
+				+ "(SELECT skill_id FROM job_profile NATURAL JOIN job NATURAL JOIN skill_require "
 				+ "WHERE job_id = (SELECT job_id FROM job WHERE person_id = 13) )"
 				+ "MINUS (SELECT skill_id FROM knows_skill WHERE person_id = 13)");
 		//7b

@@ -55,6 +55,7 @@ public class RecruitEmployeeView extends javax.swing.JFrame {
 	public RecruitEmployeeView(RecruitEmployee re) {
 		super();
 		this.re = re;
+		this.setTitle("Recruit Employees");
 		initGUI();
 	}
 	

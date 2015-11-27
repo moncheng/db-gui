@@ -82,7 +82,7 @@ public class LoginMenu extends javax.swing.JFrame {
 	public LoginMenu() {
 		super();
 		initGUI();
-		this.setTitle("Recruit Employees");
+		this.setTitle("LinRobertson Express Business Solutions");
 		loginButActionPerformed();
 		
 	}
@@ -289,7 +289,6 @@ public class LoginMenu extends javax.swing.JFrame {
 			getContentPane().setLayout(null);
 			pack();
 			this.setSize(680, 500);
-			this.setTitle("LinRobertson Express Business Solution");
 		} catch (Exception e) {
 			e.printStackTrace(); 
 		}

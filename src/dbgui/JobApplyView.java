@@ -164,7 +164,7 @@ public class JobApplyView extends javax.swing.JFrame {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			pack();
-			this.setSize(883, 485);
+			this.setSize(900, 600);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

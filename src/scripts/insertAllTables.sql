@@ -112,6 +112,26 @@ INSERT INTO knows_skill VALUES(12,4); /* knows research*/
 INSERT INTO knows_skill VALUES(13,4);	/* knows research*/
 INSERT INTO knows_skill VALUES(14,4);	/* knows research*/
 
+
+
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (1, 'Research Assistant I', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (2, 'General Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (3, 'Business Development Analyst', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (4, 'Systems Administrator III', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (5, 'Marketing Manager', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (6, 'Web Developer II', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (7, 'Environmental Specialist', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (8, 'Help Desk Technician', 'ajob');
+INSERT INTO job_profile (pos_code, job_title, description) VALUES (9, 'Information Systems Manager', 'ajob');
+INSERT INTO job_profile VALUES (10, 'Tutor', 'ajob');
+INSERT INTO job_profile VALUES (11, 'Teaching Assistant', 'ajob');
+INSERT INTO job_profile VALUES (12, 'substitute teacher', 'ajob');
+INSERT INTO job_profile VALUES (13, 'Elementry Teacher', 'ajob');
+INSERT INTO job_profile VALUES (14, 'High School Teacher', 'ajob');
+INSERT INTO job_profile VALUES (15, 'Professor', 'ajob');
+INSERT INTO job_profile VALUES (16, 'Instructor', 'ajob');
+
+
 /*which jobs require which skills*/
 INSERT INTO skill_require VALUES(1,2);	/*research assistant requires java*/
 INSERT INTO skill_require VALUES(1,4);	/*research assistant requires research*/
@@ -166,23 +186,6 @@ INSERT INTO skill_require VALUES(16,19);
 INSERT INTO skill_require VALUES(16,20);
 
 
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (1, 'Research Assistant I', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (2, 'General Manager', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (3, 'Business Development Analyst', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (4, 'Systems Administrator III', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (5, 'Marketing Manager', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (6, 'Web Developer II', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (7, 'Environmental Specialist', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (8, 'Help Desk Technician', 'ajob');
-INSERT INTO job_profile (pos_code, job_title, description) VALUES (9, 'Information Systems Manager', 'ajob');
-INSERT INTO job_profile VALUES (10, 'Tutor', 'ajob');
-INSERT INTO job_profile VALUES (11, 'Teaching Assistant', 'ajob');
-INSERT INTO job_profile VALUES (12, 'substitute teacher', 'ajob');
-INSERT INTO job_profile VALUES (13, 'Elementry Teacher', 'ajob');
-INSERT INTO job_profile VALUES (14, 'High School Teacher', 'ajob');
-INSERT INTO job_profile VALUES (15, 'Professor', 'ajob');
-INSERT INTO job_profile VALUES (16, 'Instructor', 'ajob');
-
 /*who holds what job*/
 INSERT INTO job VALUES(11,10,2,1,'full-time',30000,0, '03-APR-2014',null);	/*julia hicks is a teacher for photospace*/
 INSERT INTO job VALUES(1,6,2,1,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
@@ -196,10 +199,10 @@ INSERT INTO job VALUES(7,2,3,10,'full-time',500000,0, '03-APR-2001',null);	/* is
 INSERT INTO job VALUES(8,1,3,13,'full-time',35000,0,'03-APR-2001',null);	/*is a research assistant for Realfire*/
 INSERT INTO job VALUES(9,1,3,14,'full-time',40000,0,'03-APR-2001',null);	/* is a research assistant  for Realfire*/
 INSERT INTO job VALUES(10,13,3,20,'full-time',65000,0, '03-APR-2001',null);	/* is a Environamental Specialist for Realfire*/
-INSERT INTO job VALUES(11,6,2,25,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
-INSERT INTO job VALUES(12,6,2,24,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
-INSERT INTO job VALUES(13,6,2,23,'full-time',100000,0, '03-APR-2014',null);	/*julia hicks is a web developer II for photospace*/
-INSERT INTO job VALUES(14,6,2, 22,'full-time',100000,0, '03-APR-2014','05-APR-2014');	/*julia hicks is a web developer II for photospace*/
+INSERT INTO job VALUES(16,6,2,25,'full-time',100000,0, '03-APR-2014',null);	/* web developer II for photospace*/
+INSERT INTO job VALUES(12,6,2,24,'full-time',100000,0, '03-APR-2014',null);	/*a web developer II for photospace*/
+INSERT INTO job VALUES(13,6,2,23,'full-time',100000,0, '03-APR-2014',null);	/*a web developer II for photospace*/
+INSERT INTO job VALUES(14,6,2, 22,'full-time',100000,0, '03-APR-2014','05-APR-2014');	/*a web developer II for photospace*/
 INSERT INTO job VALUES(15,2,2, 19,'full-time',100000,0, '03-APR-2014','05-APR-2014');	
 
 
@@ -303,16 +306,6 @@ INSERT INTO prerequisite VALUES(2,1);
 
 
 
-INSERT INTO owns_phone (person_id,phone_id) VALUES (1,1);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (2,2);	
-INSERT INTO owns_phone (person_id,phone_id) VALUES (3,3);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (4,4);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (5,5);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (6,6);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (7,7);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (8,8);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (9,9);
-INSERT INTO owns_phone (person_id,phone_id) VALUES (10,10);
 
 INSERT INTO phone_number VALUES(1,1,985,2333456);	
 INSERT INTO phone_number VALUES(2,1,985,1234234);
@@ -329,6 +322,18 @@ INSERT INTO phone_number VALUES(12,1,542,0092887);
 INSERT INTO phone_number VALUES(13,1,646,3345551);
 INSERT INTO phone_number VALUES(14,1,917,2223333);
 INSERT INTO phone_number VALUES(15,1,985,1115522);
+
+
+INSERT INTO owns_phone (person_id,phone_id) VALUES (1,1);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (2,2);	
+INSERT INTO owns_phone (person_id,phone_id) VALUES (3,3);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (4,4);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (5,5);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (6,6);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (7,7);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (8,8);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (9,9);
+INSERT INTO owns_phone (person_id,phone_id) VALUES (10,10);
 
 /* two-course set */
 INSERT INTO CourseSet

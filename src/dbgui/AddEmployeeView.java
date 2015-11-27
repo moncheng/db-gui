@@ -62,6 +62,7 @@ public class AddEmployeeView extends javax.swing.JFrame {
 	public AddEmployeeView(AddEmployee ae) {
 		super();
 		this.ae = ae;
+		this.setTitle("Add Employee");
 		initGUI();
 	}
 	

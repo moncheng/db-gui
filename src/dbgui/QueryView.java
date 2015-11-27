@@ -127,7 +127,7 @@ public class QueryView extends javax.swing.JFrame {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
 			pack();
-			this.setSize(883, 500);
+			this.setSize(900, 650);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
