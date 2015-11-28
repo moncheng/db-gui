@@ -227,6 +227,13 @@ public class ProjectQueries {
 		//24a
 		queries.add("SELECT person_id,name FROM person NATURAL JOIN job JOIN job_profile using(pos_code) WHERE end_date <= to_date('08-NOV-15') AND job_title ='General Manager'");
 		//25a
+//=======
+//		//23
+//		queries.add("SELECT person_id,name FROM job_profile NATURAL JOIN job JOIN person USING(person_id) WHERE job_title= 'virus analyst'");
+//		//24
+//		queries.add("SELECT person_id,name FROM person NATURAL JOIN job JOIN job_profile using(pos_code) WHERE end_date <= to_date('08-NOV-15') AND job_title ='virus analyst'");
+//		//25
+//>>>>>>> dont remember
 		queries.add("WITH number_jobs(company_id,job_count) AS (SELECT company_id, COUNT(*) FROM job GROUP BY (company_id) ) SELECT company_id FROM number_jobs WHERE job_count = (SELECT MAX(job_count)  FROM number_jobs)");
 		//26a
 
