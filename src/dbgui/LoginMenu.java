@@ -282,8 +282,8 @@ public class LoginMenu extends javax.swing.JFrame {
 			{
 				msgArea = new JTextArea();
 				getContentPane().add(msgArea);
-				msgArea.setText("database message");
-				msgArea.setBounds(14, 119, 633, 231);
+				msgArea.setText("		Welcome to Express Business Solution.\n Our goal is to provide our customers to find infomations they want without getting touch with any SQL Statement. \n\n This area is reserved for database message");
+				msgArea.setBounds(14, 119, 633, 120);
 			}
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			getContentPane().setLayout(null);
